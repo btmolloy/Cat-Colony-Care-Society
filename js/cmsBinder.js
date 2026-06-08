@@ -58,11 +58,42 @@ const CmsBinder = (() => {
   }
 
   function bindAttribute(element, datasetKey, attributeName, context) {
-    const value = resolvePath(element.dataset[datasetKey], context);
+    let value = resolvePath(element.dataset[datasetKey], context);
 
     if (hasValue(value)) {
+      if (attributeName === 'src') {
+        value = normalizeImageSrc(value);
+      }
+
       element.setAttribute(attributeName, value);
     }
+  }
+
+  function normalizeImageSrc(value) {
+    const url = String(value).trim();
+    const googleDriveFileId = getGoogleDriveFileId(url);
+
+    if (googleDriveFileId) {
+      return `https://drive.google.com/thumbnail?id=${googleDriveFileId}&sz=w1200`;
+    }
+
+    return url;
+  }
+
+  function getGoogleDriveFileId(url) {
+    const filePathMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+
+    if (filePathMatch) {
+      return filePathMatch[1];
+    }
+
+    const queryIdMatch = url.match(/[?&]id=([^&]+)/);
+
+    if (url.includes('drive.google.com') && queryIdMatch) {
+      return queryIdMatch[1];
+    }
+
+    return null;
   }
 
   function bindFirstClass(element, context) {
