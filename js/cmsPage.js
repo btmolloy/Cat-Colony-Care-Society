@@ -6,20 +6,15 @@ const CmsPage = (() => {
   }
 
   async function init(options = {}) {
-    const status = document.getElementById('cms-status');
     const pageSheetNames = options.sheetNames || [];
     const sheetNames = unique([...sharedSheetNames, ...pageSheetNames]);
 
+    console.info(`Loading CMS sheets: ${sheetNames.join(', ')}`);
     await ComponentLoader.loadSharedComponents();
     markActiveNavLink();
     await CmsCache.loadPageContent(sheetNames);
     CmsBinder.bind(document);
-
-    if (status) {
-      status.textContent = options.loadedMessage || 'CMS content loaded.';
-      status.classList.remove('alert-secondary');
-      status.classList.add('alert-success');
-    }
+    console.info(options.loadedMessage || 'CMS content loaded.');
   }
 
   function markActiveNavLink() {
@@ -39,13 +34,7 @@ const CmsPage = (() => {
   }
 
   function showError(error) {
-    const status = document.getElementById('cms-status');
-
-    if (status) {
-      status.textContent = `Failed to load CMS content: ${error.message}`;
-      status.classList.remove('alert-secondary');
-      status.classList.add('alert-danger');
-    }
+    console.error('Failed to load CMS content:', error);
   }
 
   return {
