@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CMS Arrays Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      margin: 24px;
+    }
+
+    .status {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      margin-bottom: 16px;
+      padding: 12px;
+    }
+
+    section {
+      border-top: 1px solid #ddd;
+      margin-top: 20px;
+      padding-top: 16px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    code {
+      background: #f5f5f5;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>CMS Arrays Preview</h1>
+  <div id="status" class="status">Loading CMS content...</div>
+  <main id="output"></main>
+
+  <script>
+    const spreadsheetId = '1QZtmlsuTkXGAFxonQ1n-gZLTUU_5Jr0D';
+    const sheetNames = [
+      'Contact',
+      'Gallery',
+      'Events',
+      'Campus_Cats',
+      'About_E_Board',
+      'About_Mission',
+      'Go_Fund_Me',
+      'Meeting_Calendar',
+      'Landing_Carousel',
+      'Call_To_Action',
+      'Site_Branding'
+    ];
+
+    function loadSheet(sheetName) {
+      return new Promise((resolve, reject) => {
+        const callbackName = `cmsCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+        const script = document.createElement('script');
+        const url = new URL(`https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq`);
+
+        url.searchParams.set('sheet', sheetName);
+        url.searchParams.set('headers', '0');
+        url.searchParams.set('tqx', `out:json;responseHandler:${callbackName}`);
+
+        window[callbackName] = (data) => {
+          delete window[callbackName];
+          script.remove();
+          resolve(data);
+        };
+
+        script.onerror = () => {
+          delete window[callbackName];
+          script.remove();
+          reject(new Error(`Could not load ${sheetName}.`));
+        };
+
+        script.src = url.toString();
+        document.head.appendChild(script);
+      });
+    }
+
+    function cellToText(cell) {
+      if (!cell) {
+        return '';
+      }
+
+      const value = cell.f ?? cell.v ?? '';
+      return String(value).trim();
+    }
+
+    function tableToRows(table) {
+      const columnCount = table.cols.length;
+
+      return table.rows.map((row) => {
+        const cells = [];
+
+        for (let columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+          cells.push(cellToText(row.c[columnIndex]));
+        }
+
+        return cells;
+      });
+    }
+
+    function isNA(value) {
+      return String(value).trim().toUpperCase() === 'N/A';
+    }
+
+    function parseDisplay(value) {
+      const normalizedValue = String(value).trim().toUpperCase();
+      return normalizedValue === 'TRUE' || normalizedValue === '1';
+    }
+
+    function parseSheet(rows) {
+      const display = parseDisplay(rows[1]?.[1]);
+      const topArrayName = rows[2]?.[1]?.trim();
+      const complexity = rows[3]?.[1]?.trim().toLowerCase();
+      const contentType = rows[4]?.[1]?.trim().toLowerCase();
+      const array = { display };
+      let started = false;
+
+      rows.forEach((row, rowIndex) => {
+        if (rowIndex < 6) {
+          return;
+        }
+
+        const command = row[0].trim().toUpperCase();
+
+        if (command === 'START') {
+          started = true;
+          return;
+        }
+
+        if (command === 'END') {
+          started = false;
+          return;
+        }
+
+        if (!started || command !== 'FIELD') {
+          return;
+        }
+
+        if (complexity === 'basic' || contentType === 'static') {
+          const variableName = row[2].trim();
+          const value = row[3];
+
+          if (variableName && !isNA(variableName)) {
+            array[variableName] = value;
+          }
+
+          return;
+        }
+
+        const subArrayName = row[2].trim();
+        const variableName = row[3].trim();
+        const value = row[4];
+
+        if (!variableName || isNA(variableName)) {
+          return;
+        }
+
+        if (contentType === 'hybrid' && (!subArrayName || isNA(subArrayName))) {
+          array[variableName] = value;
+          return;
+        }
+
+        if (!subArrayName || isNA(subArrayName)) {
+          return;
+        }
+
+        if (!array[subArrayName]) {
+          array[subArrayName] = {};
+        }
+
+        array[subArrayName][variableName] = value;
+      });
+
+      return {
+        name: topArrayName,
+        value: array
+      };
+    }
+
+    function printValue(parent, path, value) {
+      const list = document.createElement('ul');
+
+      Object.entries(value).forEach(([key, entryValue]) => {
+        const item = document.createElement('li');
+        const currentPath = `${path}.${key}`;
+
+        if (entryValue && typeof entryValue === 'object') {
+          const label = document.createElement('strong');
+          label.textContent = currentPath;
+          item.appendChild(label);
+          printValue(item, currentPath, entryValue);
+        } else {
+          item.innerHTML = `<code>${currentPath}</code>: ${entryValue}`;
+        }
+
+        list.appendChild(item);
+      });
+
+      parent.appendChild(list);
+    }
+
+    function printCmsArrays(cmsArrays) {
+      const output = document.getElementById('output');
+      output.innerHTML = '';
+
+      Object.entries(cmsArrays).forEach(([arrayName, arrayValue]) => {
+        const section = document.createElement('section');
+        const heading = document.createElement('h2');
+
+        heading.textContent = arrayName;
+        section.appendChild(heading);
+        printValue(section, arrayName, arrayValue);
+        output.appendChild(section);
+      });
+    }
+
+    async function main() {
+      const status = document.getElementById('status');
+      const cmsArrays = {};
+
+      for (const sheetName of sheetNames) {
+        const data = await loadSheet(sheetName);
+        const rows = tableToRows(data.table);
+        const parsedSheet = parseSheet(rows);
+
+        cmsArrays[parsedSheet.name] = parsedSheet.value;
+      }
+
+      window.cmsArrays = cmsArrays;
+      Object.assign(window, cmsArrays);
+      printCmsArrays(cmsArrays);
+      status.textContent = `Loaded ${Object.keys(cmsArrays).length} CMS arrays.`;
+    }
+
+    main().catch((error) => {
+      document.getElementById('status').textContent = `Failed to load CMS content: ${error.message}`;
+    });
+  </script>
+</body>
+</html>
