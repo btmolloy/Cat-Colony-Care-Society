@@ -1,4 +1,10 @@
 const ComponentLoader = (() => {
+  const componentPaths = {
+    header: 'components/header.html',
+    footer: 'components/footer.html',
+    calendar: 'components/calendar.html'
+  };
+
   function getText(url) {
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
@@ -27,10 +33,28 @@ const ComponentLoader = (() => {
     target.innerHTML = await getText(componentPath);
   }
 
+  async function loadComponentElement(target) {
+    const componentName = target.dataset.component;
+    const componentPath = componentPaths[componentName];
+
+    if (!componentPath) {
+      return;
+    }
+
+    target.innerHTML = await getText(componentPath);
+  }
+
   async function loadSharedComponents() {
+    const componentTargets = Array.from(document.querySelectorAll('[data-component]'));
+
+    if (componentTargets.length) {
+      await Promise.all(componentTargets.map(loadComponentElement));
+      return;
+    }
+
     await Promise.all([
-      loadComponent('[data-component="header"]', 'components/header.html'),
-      loadComponent('[data-component="footer"]', 'components/footer.html')
+      loadComponent('[data-component="header"]', componentPaths.header),
+      loadComponent('[data-component="footer"]', componentPaths.footer)
     ]);
   }
 
