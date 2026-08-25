@@ -3,38 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="">
   <title>Contact | Cat Colony Care Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script src="js/cmsTheme.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/site.css" rel="stylesheet">
 </head>
-<body>
+<body class="page-contact">
   <div data-component="header"></div>
 
   <main>
-    <section class="py-5 bg-light border-bottom">
+    <section class="page-hero">
       <div class="container">
-        <h1 class="display-5 fw-bold">Contact</h1>
-        <p class="lead">Reach out to the club or follow along online.</p>
+        <div class="page-hero-shell">
+          <div class="page-hero-copy">
+            <p class="eyebrow">Let’s connect</p>
+            <h1 class="page-title mb-4">Contact</h1>
+            <p class="page-lead mb-0">Reach out to the club or follow along online.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="py-5">
+    <section class="section-block pt-0">
       <div class="container">
         <div class="row g-4">
           <div class="col-lg-7">
-            <div class="card shadow-sm">
+            <div class="card card-accent-teal h-100">
               <div class="card-body">
+                <p class="card-kicker mb-2">Find us online</p>
                 <h2 class="h3">Club Contact Information</h2>
-                <p>Email: <span data-cms-text="contact.Email">example@email.com</span></p>
-                <p>Instagram: <a href="#" data-cms-href="contact.InstagramURL" data-cms-text="contact.InstagramURL">Instagram</a></p>
-                <p>MyEngagement: <a href="#" data-cms-href="contact.MyEngagmentURL" data-cms-text="contact.MyEngagmentURL">MyEngagement</a></p>
+                <p class="text-body-secondary">Questions, ideas, or want to get involved? Reach the society through any of these channels.</p>
+                <ul class="contact-list">
+                  <li>
+                    <span class="contact-icon" aria-hidden="true">@</span>
+                    <span><span class="contact-list-label">Email</span><span data-cms-text="contact.Email">example@email.com</span></span>
+                  </li>
+                  <li>
+                    <span class="contact-icon" aria-hidden="true">↗</span>
+                    <span><span class="contact-list-label">Instagram</span><a href="#" data-cms-href="contact.InstagramURL">Follow our updates</a></span>
+                  </li>
+                  <li>
+                    <span class="contact-icon" aria-hidden="true">✦</span>
+                    <span><span class="contact-list-label">MyEngagement</span><a href="#" data-cms-href="contact.MyEngagmentURL">View our organization</a></span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
           <div class="col-lg-5">
-            <div class="card h-100 bg-light border-0">
+            <div class="card card-accent-coral h-100">
               <div class="card-body">
-                <h2 class="h4" data-cms-text="branding.Title">Cat Colony Care Society</h2>
-                <p data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</p>
+                <p class="card-kicker mb-2">Care starts with community</p>
+                <h2 class="h3" data-cms-text="branding.Title">Cat Colony Care Society</h2>
+                <p class="text-body-secondary" data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</p>
               </div>
             </div>
           </div>

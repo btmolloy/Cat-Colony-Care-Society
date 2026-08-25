@@ -13,6 +13,7 @@ const CmsPage = (() => {
     await ComponentLoader.loadSharedComponents();
     markActiveNavLink();
     await CmsCache.loadPageContent(sheetNames);
+    CmsTheme.apply(window.cmsArrays?.branding);
     CmsBinder.bind(document);
     console.info(options.loadedMessage || 'CMS content loaded.');
   }

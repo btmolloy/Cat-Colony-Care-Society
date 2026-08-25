@@ -3,55 +3,74 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="">
   <title>About | Cat Colony Care Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script src="js/cmsTheme.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/site.css" rel="stylesheet">
 </head>
-<body>
+<body class="page-about">
   <div data-component="header"></div>
 
   <main>
-    <section class="py-5 bg-light border-bottom">
+    <section class="page-hero">
       <div class="container">
-        <div class="row align-items-center g-4">
-          <div class="col-lg-8">
-            <p class="text-uppercase fw-semibold text-success mb-2" data-cms-text="branding.Abreviation">CCCS</p>
-            <h1 class="display-5 fw-bold" data-cms-text="aboutmission.Title">About the Club</h1>
-            <p class="lead" data-cms-text="aboutmission.Paragraph1">Learn more about the students caring for campus cats.</p>
-          </div>
-          <div class="col-lg-4">
-            <img class="img-fluid rounded shadow-sm" data-cms-src="aboutmission.Image1" alt="About Cat Colony Care Society">
+        <div class="page-hero-shell">
+          <div class="row align-items-center g-4 g-lg-5">
+            <div class="col-lg-7">
+              <div class="page-hero-copy">
+                <p class="eyebrow" data-cms-text="branding.Abreviation">CCCS</p>
+                <h1 class="page-title mb-4" data-cms-text="aboutmission.Title">About the Club</h1>
+                <p class="page-lead mb-0" data-cms-text="aboutmission.Paragraph1">Learn more about the students caring for campus cats.</p>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <img class="page-hero-media" data-cms-src="aboutmission.Image1" alt="About Cat Colony Care Society">
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-5">
+    <section class="section-block pt-0">
       <div class="container">
-        <div class="row g-4">
-          <div class="col-lg-6">
-            <h2 class="h3">Our Mission</h2>
-            <p data-cms-text="aboutmission.Paragraph1">Mission content from the CMS appears here.</p>
-            <p data-cms-text="aboutmission.Paragraph2">Additional mission content from the CMS appears here.</p>
-          </div>
-          <div class="col-lg-6">
-            <img class="img-fluid rounded shadow-sm" data-cms-src="aboutmission.Image2" alt="Campus cat care mission">
+        <div class="glass-panel">
+          <div class="row align-items-stretch g-4 g-lg-5">
+            <div class="col-lg-6 d-flex align-items-center">
+              <div class="mission-copy">
+                <p class="eyebrow">Why we’re here</p>
+                <h2 class="section-title">Our Mission</h2>
+                <p data-cms-text="aboutmission.Paragraph1">Mission content from the CMS appears here.</p>
+                <p data-cms-text="aboutmission.Paragraph2">Additional mission content from the CMS appears here.</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <img class="mission-image" data-cms-src="aboutmission.Image2" alt="Campus cat care mission">
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-5 bg-light border-top">
+    <section class="section-block section-tint">
       <div class="container">
-        <h2 class="h3 mb-4">E-Board</h2>
+        <div class="section-heading">
+          <p class="eyebrow">The people behind the care</p>
+          <h2 class="section-title">Meet the E-Board.</h2>
+          <p class="section-intro mb-0">Students leading the work with compassion, coordination, and a whole lot of heart.</p>
+        </div>
         <div class="row g-4" data-cms-repeat="abouteboard">
           <template>
             <div class="col-md-6 col-lg-4">
-              <div class="card h-100 shadow-sm">
+              <div class="card profile-card h-100">
                 <img class="card-img-top" data-cms-src="$item.Image" data-cms-alt="$item.Name" alt="E-board member">
                 <div class="card-body">
                   <h3 class="h5" data-cms-text="$item.Name">Member Name</h3>
-                  <p class="fw-semibold text-success mb-2" data-cms-text="$item.Position">Position</p>
-                  <p data-cms-text="$item.AboutParagraph">Member bio from CMS.</p>
+                  <p class="card-kicker mb-3" data-cms-text="$item.Position">Position</p>
+                  <p class="text-body-secondary" data-cms-text="$item.AboutParagraph">Member bio from CMS.</p>
                 </div>
               </div>
             </div>

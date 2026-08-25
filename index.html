@@ -3,56 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="">
   <title>Cat Colony Care Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script src="js/cmsTheme.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    #homepageCarousel {
-      margin: 0 auto;
-      max-width: 960px;
-    }
-
-    #homepageCarousel .carousel-item img {
-      height: clamp(260px, 42vw, 440px);
-      object-fit: cover;
-    }
-  </style>
+  <link href="css/site.css" rel="stylesheet">
 </head>
-<body>
+<body class="page-home">
   <div data-component="header"></div>
 
   <main>
-    <section class="py-5 bg-light border-bottom">
+    <section class="hero-section">
       <div class="container">
-        <div class="row align-items-center g-4">
-          <div class="col-lg-7">
-            <p class="text-uppercase fw-semibold text-success mb-2" data-cms-text="branding.Abreviation">CCCS</p>
-            <h1 class="display-4 fw-bold" data-cms-text="branding.Title">Cat Colony Care Society</h1>
-            <p class="lead" data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</p>
-          </div>
-          <div class="col-lg-5">
-            <div class="card shadow-sm">
-              <div class="card-body">
-                <h2 class="h4" data-cms-text="calltoaction.Title">Get Involved</h2>
-                <p data-cms-text="calltoaction.Paragraph1">Help us support the campus cats through feeding, fundraising, and outreach.</p>
-                <a class="btn btn-success" href="#" data-cms-href="calltoaction.SignUpLink">Sign Up</a>
+        <div class="hero-shell">
+          <div class="row align-items-center g-4 g-lg-5">
+            <div class="col-lg-7">
+              <div class="hero-copy">
+                <p class="eyebrow" data-cms-text="branding.Abreviation">CCCS</p>
+                <h1 class="hero-title mb-4" data-cms-text="branding.Title">Cat Colony Care Society</h1>
+                <p class="hero-lead mb-0" data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</p>
               </div>
+            </div>
+            <div class="col-lg-5">
+              <aside class="hero-cta-card">
+                <p class="card-kicker mb-2">Make an impact</p>
+                <h2 class="h3" data-cms-text="calltoaction.Title">Get Involved</h2>
+                <p data-cms-text="calltoaction.Paragraph1">Help us support the campus cats through feeding, fundraising, and outreach.</p>
+                <a class="btn btn-success mt-2" href="#" data-cms-href="calltoaction.SignUpLink">Sign Up</a>
+              </aside>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-5">
+    <section class="section-block pt-0">
       <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Inside the colony</p>
+          <h2 class="section-title">Care, connection, and campus life.</h2>
+          <p class="section-intro mb-0">Meet the cats and the community working together to give them safe, healthy lives.</p>
+        </div>
         <div id="homepageCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner rounded shadow-sm" data-cms-repeat="landingcarousel">
+          <div class="carousel-inner" data-cms-repeat="landingcarousel">
             <template>
-              <div class="carousel-item bg-dark" data-cms-first-class="active">
-                <img class="d-block w-100 opacity-75" data-cms-src="$item.Image" data-cms-alt="$item.Title" alt="Campus cat carousel image">
-                <div class="carousel-caption d-none d-md-block">
+              <div class="carousel-item" data-cms-first-class="active">
+                <img class="d-block w-100" data-cms-src="$item.Image" data-cms-alt="$item.Title" alt="Campus cat carousel image">
+                <div class="carousel-caption">
+                  <p class="card-kicker mb-2">From our community</p>
                   <h2 data-cms-text="$item.Title">Carousel Slide</h2>
                   <p data-cms-text="$item.Paragraph">Carousel paragraph from the CMS.</p>
-                  <a class="btn btn-light" href="#" data-cms-href="$item.Link">Learn More</a>
+                  <a class="btn btn-light mt-2" href="#" data-cms-href="$item.Link">Learn More</a>
                 </div>
               </div>
             </template>
@@ -69,25 +73,42 @@
       </div>
     </section>
 
-    <section class="py-5 bg-light border-top border-bottom">
+    <section class="section-block section-tint">
       <div class="container">
+        <div class="section-heading text-center mx-auto">
+          <p class="eyebrow justify-content-center">Ways to connect</p>
+          <h2 class="section-title">Help the colony thrive.</h2>
+        </div>
         <div class="row g-4">
           <div class="col-md-6">
-            <div class="card h-100 shadow-sm">
+            <div class="card content-card card-accent-coral h-100">
               <div class="card-body">
+                <p class="card-kicker mb-2">Give with purpose</p>
                 <h2 class="h3" data-cms-text="gofundme.Title">Support the Colony</h2>
-                <p data-cms-text="gofundme.Paragraph">Donations help provide food, supplies, and care for campus cats.</p>
-                <a class="btn btn-warning" href="#" data-cms-href="gofundme.Link">Donate</a>
+                <p class="text-body-secondary" data-cms-text="gofundme.Paragraph">Donations help provide food, supplies, and care for campus cats.</p>
+                <a class="btn btn-warning mt-2" href="#" data-cms-href="gofundme.Link">Donate</a>
               </div>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card h-100 shadow-sm">
+            <div class="card content-card card-accent-teal h-100">
               <div class="card-body">
+                <p class="card-kicker mb-2">Stay connected</p>
                 <h2 class="h3">Contact Us</h2>
-                <p>Email: <span data-cms-text="contact.Email">example@email.com</span></p>
-                <p>Instagram: <a href="#" data-cms-href="contact.InstagramURL" data-cms-text="contact.InstagramURL">Instagram</a></p>
-                <p>MyEngagement: <a href="#" data-cms-href="contact.MyEngagmentURL" data-cms-text="contact.MyEngagmentURL">MyEngagement</a></p>
+                <ul class="contact-list">
+                  <li>
+                    <span class="contact-icon" aria-hidden="true">@</span>
+                    <span><span class="contact-list-label">Email</span><span data-cms-text="contact.Email">example@email.com</span></span>
+                  </li>
+                  <li>
+                    <span class="contact-icon" aria-hidden="true">↗</span>
+                    <span><span class="contact-list-label">Instagram</span><a href="#" data-cms-href="contact.InstagramURL">Follow along</a></span>
+                  </li>
+                  <li>
+                    <span class="contact-icon" aria-hidden="true">✦</span>
+                    <span><span class="contact-list-label">MyEngagement</span><a href="#" data-cms-href="contact.MyEngagmentURL">Visit our page</a></span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

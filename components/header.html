@@ -1,28 +1,42 @@
-<div class="bg-success text-white small py-2">
-  <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
-    <span data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</span>
-    <span>
-      Email: <span data-cms-text="contact.Email">example@email.com</span>
-      <span class="mx-2">|</span>
-      <a class="link-light" href="#" data-cms-href="contact.InstagramURL" data-cms-text="contact.InstagramURL">Instagram</a>
-    </span>
-  </div>
-</div>
-<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html" data-cms-text="branding.Title">Cat Colony Care Society</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="mainNav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html" data-nav-link>Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html" data-nav-link>About</a></li>
-        <li class="nav-item"><a class="nav-link" href="campus-cats.html" data-nav-link>Campus Cats</a></li>
-        <li class="nav-item"><a class="nav-link" href="events.html" data-nav-link>Events</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html" data-nav-link>Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html" data-nav-link>Contact</a></li>
-      </ul>
+<header class="site-header">
+  <div class="announcement-bar">
+    <div class="container d-flex justify-content-between gap-3">
+      <span class="announcement-copy">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</span>
+      </span>
+      <span class="announcement-contact">
+        <span class="announcement-email-label">Email:</span>
+        <span data-cms-text="contact.Email">example@email.com</span>
+        <span aria-hidden="true">•</span>
+        <a href="#" data-cms-href="contact.InstagramURL">Instagram</a>
+      </span>
     </div>
   </div>
-</nav>
+  <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-mark">
+          <img data-cms-src="branding.ClubLogo" alt="Cat Colony Care Society logo">
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name" data-cms-text="branding.Title">Cat Colony Care Society</span>
+          <span class="brand-tagline">Care • Community • Campus</span>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="mainNav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html" data-nav-link>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html" data-nav-link>About</a></li>
+          <li class="nav-item"><a class="nav-link" href="campus-cats.html" data-nav-link>Campus Cats</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.html" data-nav-link>Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html" data-nav-link>Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html" data-nav-link>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

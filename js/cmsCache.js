@@ -1,5 +1,5 @@
 const CmsCache = (() => {
-  const cacheKeyPrefix = 'cccsCmsSheet:';
+  const cacheKeyPrefix = 'cccsCmsSheet:v2:';
   const defaultCacheMinutes = 10;
 
   function getCacheKey(sheetName) {
