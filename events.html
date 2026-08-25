@@ -10,49 +10,52 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <script src="js/cmsTheme.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/site.css" rel="stylesheet">
+  <link href="css/site.css?v=4" rel="stylesheet">
 </head>
 <body class="page-events">
   <div data-component="header"></div>
 
   <main>
-    <section class="page-hero">
+    <section class="route-intro events-intro">
       <div class="container">
-        <div class="page-hero-shell">
-          <div class="page-hero-copy">
-            <p class="eyebrow">Gather for good</p>
-            <h1 class="page-title mb-4" data-cms-text="events.PageTitle">Events</h1>
-            <p class="page-lead mb-0">Club events, meetings, and ways to support the campus cat colony.</p>
+        <div class="events-title-row">
+          <div class="route-intro-copy">
+            <p class="section-label">Gather for good</p>
+            <h1 data-cms-text="events.PageTitle">Events</h1>
           </div>
+          <p>Club events, meetings, and ways to support the campus cat colony.</p>
         </div>
+        <div class="events-intro-photo" role="img" aria-label="Campus cats gathering"></div>
       </div>
     </section>
 
-    <section class="section-block pt-0">
+    <section class="events-list-section">
       <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">On the calendar</p>
-          <h2 class="section-title">Featured Events</h2>
-          <p class="section-intro mb-0">Show up, meet fellow cat people, and help turn compassion into practical care.</p>
+        <div class="editorial-heading">
+          <p class="section-label">On the calendar</p>
+          <div>
+            <h2>Featured Events</h2>
+            <p>Show up, meet fellow cat people, and help turn compassion into practical care.</p>
+          </div>
         </div>
-        <div class="row g-4" data-cms-repeat="events">
+        <div class="event-list" data-cms-repeat="events">
           <template>
-            <div class="col-md-6">
-              <div class="card event-card h-100">
+            <article class="event-card">
+              <div class="event-card-media">
                 <img class="card-img-top" data-cms-src="$item.EventPhoto" data-cms-alt="$item.EventTitle" alt="Event image">
-                <div class="card-body">
-                  <h3 class="h4" data-cms-text="$item.EventTitle">Event Title</h3>
-                  <p class="card-kicker mb-3" data-cms-text="$item.EventDate">Event Date</p>
-                  <p class="text-body-secondary" data-cms-text="$item.EventDescription">Event description from CMS.</p>
-                </div>
               </div>
-            </div>
+              <div class="event-card-body">
+                <p class="event-date" data-cms-text="$item.EventDate">Event Date</p>
+                <h3 data-cms-text="$item.EventTitle">Event Title</h3>
+                <p data-cms-text="$item.EventDescription">Event description from CMS.</p>
+              </div>
+            </article>
           </template>
         </div>
       </div>
     </section>
 
-    <section class="section-block calendar-section">
+    <section class="calendar-section">
       <div data-component="calendar"></div>
     </section>
   </main>
@@ -62,7 +65,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/cmsContentLoader.js"></script>
   <script src="js/cmsCache.js"></script>
-  <script src="js/componentLoader.js"></script>
+  <script src="js/componentLoader.js?v=3"></script>
   <script src="js/cmsBinder.js"></script>
   <script src="js/cmsPage.js"></script>
   <script src="js/calendarComponent.js"></script>

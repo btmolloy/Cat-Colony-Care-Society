@@ -10,53 +10,51 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <script src="js/cmsTheme.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/site.css" rel="stylesheet">
+  <link href="css/site.css?v=4" rel="stylesheet">
 </head>
 <body class="page-home">
   <div data-component="header"></div>
 
   <main>
-    <section class="hero-section">
+    <section class="home-hero">
       <div class="container">
-        <div class="hero-shell">
-          <div class="row align-items-center g-4 g-lg-5">
-            <div class="col-lg-7">
-              <div class="hero-copy">
-                <p class="eyebrow" data-cms-text="branding.Abreviation">CCCS</p>
-                <h1 class="hero-title mb-4" data-cms-text="branding.Title">Cat Colony Care Society</h1>
-                <p class="hero-lead mb-0" data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</p>
-              </div>
-            </div>
-            <div class="col-lg-5">
-              <aside class="hero-cta-card">
-                <p class="card-kicker mb-2">Make an impact</p>
-                <h2 class="h3" data-cms-text="calltoaction.Title">Get Involved</h2>
-                <p data-cms-text="calltoaction.Paragraph1">Help us support the campus cats through feeding, fundraising, and outreach.</p>
-                <a class="btn btn-success mt-2" href="#" data-cms-href="calltoaction.SignUpLink">Sign Up</a>
-              </aside>
-            </div>
+        <div class="home-hero-grid">
+          <div class="home-hero-copy">
+            <p class="section-label" data-cms-text="branding.Abreviation">CCCS</p>
+            <h1 class="home-hero-title" data-cms-text="branding.Title">Cat Colony Care Society</h1>
+            <p class="home-hero-lead" data-cms-text="branding.Description">Protecting and caring for the campus cat colony.</p>
+          </div>
+          <div class="home-hero-photo">
+            <aside class="home-hero-action glass-accent">
+              <p class="utility-label">Get involved</p>
+              <h2 data-cms-text="calltoaction.Title">Get Involved</h2>
+              <p data-cms-text="calltoaction.Paragraph1">Help us support the campus cats through feeding, fundraising, and outreach.</p>
+              <a class="btn btn-success" href="#" data-cms-href="calltoaction.SignUpLink">Sign Up</a>
+            </aside>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-block pt-0">
+    <section class="story-section">
       <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Inside the colony</p>
-          <h2 class="section-title">Care, connection, and campus life.</h2>
-          <p class="section-intro mb-0">Meet the cats and the community working together to give them safe, healthy lives.</p>
+        <div class="editorial-heading">
+          <p class="section-label">Inside the colony</p>
+          <div>
+            <h2>Care, connection, and campus life.</h2>
+            <p>Meet the cats and the community working together to give them safe, healthy lives.</p>
+          </div>
         </div>
         <div id="homepageCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner" data-cms-repeat="landingcarousel">
             <template>
               <div class="carousel-item" data-cms-first-class="active">
                 <img class="d-block w-100" data-cms-src="$item.Image" data-cms-alt="$item.Title" alt="Campus cat carousel image">
-                <div class="carousel-caption">
-                  <p class="card-kicker mb-2">From our community</p>
+                <div class="carousel-caption glass-accent">
+                  <p class="utility-label">From our community</p>
                   <h2 data-cms-text="$item.Title">Carousel Slide</h2>
                   <p data-cms-text="$item.Paragraph">Carousel paragraph from the CMS.</p>
-                  <a class="btn btn-light mt-2" href="#" data-cms-href="$item.Link">Learn More</a>
+                  <a class="text-link" href="#" data-cms-href="$item.Link">Learn More</a>
                 </div>
               </div>
             </template>
@@ -73,44 +71,36 @@
       </div>
     </section>
 
-    <section class="section-block section-tint">
+    <section class="community-section">
       <div class="container">
-        <div class="section-heading text-center mx-auto">
-          <p class="eyebrow justify-content-center">Ways to connect</p>
-          <h2 class="section-title">Help the colony thrive.</h2>
+        <div class="community-heading">
+          <p class="section-label">Ways to connect</p>
+          <h2>Help the colony thrive.</h2>
         </div>
-        <div class="row g-4">
-          <div class="col-md-6">
-            <div class="card content-card card-accent-coral h-100">
-              <div class="card-body">
-                <p class="card-kicker mb-2">Give with purpose</p>
-                <h2 class="h3" data-cms-text="gofundme.Title">Support the Colony</h2>
-                <p class="text-body-secondary" data-cms-text="gofundme.Paragraph">Donations help provide food, supplies, and care for campus cats.</p>
-                <a class="btn btn-warning mt-2" href="#" data-cms-href="gofundme.Link">Donate</a>
-              </div>
-            </div>
+        <div class="community-grid">
+          <div class="support-block">
+            <p class="utility-label">Give with purpose</p>
+            <h3 data-cms-text="gofundme.Title">Support the Colony</h3>
+            <p data-cms-text="gofundme.Paragraph">Donations help provide food, supplies, and care for campus cats.</p>
+            <a class="btn btn-warning" href="#" data-cms-href="gofundme.Link">Donate</a>
           </div>
-          <div class="col-md-6">
-            <div class="card content-card card-accent-teal h-100">
-              <div class="card-body">
-                <p class="card-kicker mb-2">Stay connected</p>
-                <h2 class="h3">Contact Us</h2>
-                <ul class="contact-list">
-                  <li>
-                    <span class="contact-icon" aria-hidden="true">@</span>
-                    <span><span class="contact-list-label">Email</span><span data-cms-text="contact.Email">example@email.com</span></span>
-                  </li>
-                  <li>
-                    <span class="contact-icon" aria-hidden="true">↗</span>
-                    <span><span class="contact-list-label">Instagram</span><a href="#" data-cms-href="contact.InstagramURL">Follow along</a></span>
-                  </li>
-                  <li>
-                    <span class="contact-icon" aria-hidden="true">✦</span>
-                    <span><span class="contact-list-label">MyEngagement</span><a href="#" data-cms-href="contact.MyEngagmentURL">Visit our page</a></span>
-                  </li>
-                </ul>
+          <div class="contact-block">
+            <p class="utility-label">Stay connected</p>
+            <h3>Contact Us</h3>
+            <dl class="contact-details">
+              <div>
+                <dt>Email</dt>
+                <dd data-cms-text="contact.Email">example@email.com</dd>
               </div>
-            </div>
+              <div>
+                <dt>Instagram</dt>
+                <dd><a href="#" data-cms-href="contact.InstagramURL">Follow along</a></dd>
+              </div>
+              <div>
+                <dt>MyEngagement</dt>
+                <dd><a href="#" data-cms-href="contact.MyEngagmentURL">Visit our page</a></dd>
+              </div>
+            </dl>
           </div>
         </div>
       </div>
@@ -122,7 +112,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/cmsContentLoader.js"></script>
   <script src="js/cmsCache.js"></script>
-  <script src="js/componentLoader.js"></script>
+  <script src="js/componentLoader.js?v=3"></script>
   <script src="js/cmsBinder.js"></script>
   <script src="js/cmsPage.js"></script>
   <script src="js/pages/index.js"></script>

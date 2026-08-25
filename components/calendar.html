@@ -1,38 +1,34 @@
 <div class="container" data-calendar-component>
-  <div class="card border-0 overflow-hidden cccs-calendar">
-    <div class="card-body p-0">
-      <div class="p-4 border-bottom bg-white">
-        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
-          <div>
-            <p class="text-uppercase fw-semibold text-success mb-1">Meeting Calendar</p>
-            <h2 class="h3 mb-1" data-cms-text="meetingcalendar.CalendarTitle">Meeting Calendar</h2>
-            <p class="text-body-secondary mb-0" data-calendar-range>Showing this week and the next three weeks.</p>
-          </div>
-          <div class="d-flex flex-wrap gap-2 align-items-start justify-content-lg-end">
-            <span class="badge text-bg-success">Current week starts at the top</span>
-            <span class="badge text-bg-light border text-body-secondary" data-calendar-month-note>Next month days are shaded.</span>
-          </div>
-        </div>
+  <div class="cccs-calendar">
+    <div class="calendar-header">
+      <div>
+        <p class="section-label">Meeting calendar</p>
+        <h2 data-cms-text="meetingcalendar.CalendarTitle">Meeting Calendar</h2>
+        <p data-calendar-range>Showing this week and the next three weeks.</p>
       </div>
+      <div class="calendar-key" aria-label="Calendar display notes">
+        <span>Current week starts at the top</span>
+        <span data-calendar-month-note>Next month days are shaded.</span>
+      </div>
+    </div>
 
-      <div class="cccs-calendar-scroll">
-        <div class="cccs-calendar-grid" role="grid" aria-label="Meeting calendar">
-          <div class="cccs-calendar-weekdays" role="row">
-            <div class="cccs-calendar-weekday" role="columnheader">Sun</div>
-            <div class="cccs-calendar-weekday" role="columnheader">Mon</div>
-            <div class="cccs-calendar-weekday" role="columnheader">Tue</div>
-            <div class="cccs-calendar-weekday" role="columnheader">Wed</div>
-            <div class="cccs-calendar-weekday" role="columnheader">Thu</div>
-            <div class="cccs-calendar-weekday" role="columnheader">Fri</div>
-            <div class="cccs-calendar-weekday" role="columnheader">Sat</div>
-          </div>
-          <div class="cccs-calendar-days" data-calendar-grid></div>
+    <div class="cccs-calendar-scroll">
+      <div class="cccs-calendar-grid" role="grid" aria-label="Meeting calendar">
+        <div class="cccs-calendar-weekdays" role="row">
+          <div class="cccs-calendar-weekday" role="columnheader">Sun</div>
+          <div class="cccs-calendar-weekday" role="columnheader">Mon</div>
+          <div class="cccs-calendar-weekday" role="columnheader">Tue</div>
+          <div class="cccs-calendar-weekday" role="columnheader">Wed</div>
+          <div class="cccs-calendar-weekday" role="columnheader">Thu</div>
+          <div class="cccs-calendar-weekday" role="columnheader">Fri</div>
+          <div class="cccs-calendar-weekday" role="columnheader">Sat</div>
         </div>
+        <div class="cccs-calendar-days" data-calendar-grid></div>
       </div>
+    </div>
 
-      <div class="p-4 border-top text-body-secondary" data-calendar-empty hidden>
-        No meeting calendar events are scheduled in this four-week view.
-      </div>
+    <div class="calendar-empty" data-calendar-empty hidden>
+      No meeting calendar events are scheduled in this four-week view.
     </div>
   </div>
 </div>
