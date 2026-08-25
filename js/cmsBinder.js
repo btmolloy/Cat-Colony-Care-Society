@@ -74,7 +74,7 @@ const CmsBinder = (() => {
     const googleDriveFileId = getGoogleDriveFileId(url);
 
     if (googleDriveFileId) {
-      return `https://drive.google.com/thumbnail?id=${googleDriveFileId}&sz=w1200`;
+      return `https://lh3.googleusercontent.com/d/${googleDriveFileId}=w1200`;
     }
 
     return url;

@@ -2,16 +2,16 @@
   --ink: color-mix(in srgb, var(--brand-primary) 94%, var(--brand-fourth));
   --copy: color-mix(in srgb, var(--brand-primary) 78%, var(--brand-fourth));
   --muted: color-mix(in srgb, var(--brand-primary) 54%, var(--brand-fourth));
-  --canvas: color-mix(in srgb, var(--brand-fourth) 96%, var(--brand-primary));
+  --canvas: color-mix(in srgb, var(--brand-fourth) 92%, var(--brand-primary));
   --paper: var(--brand-fourth);
-  --soft-primary: color-mix(in srgb, var(--brand-primary) 6%, var(--brand-fourth));
-  --soft-secondary: color-mix(in srgb, var(--brand-secondary) 8%, var(--brand-fourth));
-  --soft-third: color-mix(in srgb, var(--brand-third) 7%, var(--brand-fourth));
+  --soft-primary: color-mix(in srgb, var(--brand-primary) 12%, var(--brand-fourth));
+  --soft-secondary: color-mix(in srgb, var(--brand-secondary) 13%, var(--brand-fourth));
+  --soft-third: color-mix(in srgb, var(--brand-third) 12%, var(--brand-fourth));
   --rule: color-mix(in srgb, var(--brand-primary) 17%, transparent);
   --rule-strong: color-mix(in srgb, var(--brand-primary) 31%, transparent);
-  --glass: color-mix(in srgb, var(--brand-fourth) 76%, transparent);
+  --glass: color-mix(in srgb, var(--brand-fourth) 58%, transparent);
   --glass-border: color-mix(in srgb, var(--brand-fourth) 76%, transparent);
-  --quiet-shadow: 0 18px 48px color-mix(in srgb, var(--brand-primary) 12%, transparent);
+  --quiet-shadow: 0 16px 40px color-mix(in srgb, var(--brand-primary) 16%, transparent);
   --bs-success: var(--brand-secondary);
   --bs-warning: var(--brand-secondary);
   --bs-border-color: var(--rule);
@@ -126,8 +126,8 @@ figure:last-child {
 }
 
 .glass-accent {
-  -webkit-backdrop-filter: blur(20px) saturate(125%);
-  backdrop-filter: blur(20px) saturate(125%);
+  -webkit-backdrop-filter: blur(12px) saturate(135%);
+  backdrop-filter: blur(12px) saturate(135%);
   background: var(--glass);
   border: 1px solid var(--glass-border);
   box-shadow: var(--quiet-shadow);
@@ -198,9 +198,9 @@ figure:last-child {
 }
 
 .navbar {
-  -webkit-backdrop-filter: blur(18px) saturate(115%);
-  backdrop-filter: blur(18px) saturate(115%);
-  background: color-mix(in srgb, var(--brand-fourth) 90%, transparent) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(125%);
+  backdrop-filter: blur(12px) saturate(125%);
+  background: color-mix(in srgb, var(--brand-fourth) 82%, transparent) !important;
   border-bottom: 1px solid var(--rule);
   min-height: 4.75rem;
   padding: 0.65rem 0;
@@ -297,25 +297,27 @@ figure:last-child {
 }
 
 .home-hero {
-  padding: clamp(4.5rem, 9vw, 7.5rem) 0 clamp(5.5rem, 10vw, 8.5rem);
+  background: linear-gradient(115deg, var(--soft-third), var(--canvas) 48%, var(--soft-secondary));
+  border-bottom: 1px solid var(--rule);
+  padding: clamp(3rem, 6vw, 4.75rem) 0;
 }
 
 .home-hero-grid {
   align-items: stretch;
   display: grid;
-  gap: clamp(2rem, 5vw, 5.5rem);
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
 }
 
 .home-hero-copy {
   align-self: center;
   min-width: 0;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .home-hero-title {
-  font-size: clamp(3.2rem, 6.5vw, 5.35rem);
-  margin: 0 0 1.75rem;
+  font-size: clamp(2.9rem, 5vw, 4.25rem);
+  margin: 0 0 1.25rem;
   max-width: 8.5ch;
 }
 
@@ -327,25 +329,37 @@ figure:last-child {
 }
 
 .home-hero-photo {
+  align-items: flex-end;
   background-image: var(--brand-image-1, none);
   background-position: center 62%;
   background-size: cover;
   border-radius: 0.45rem;
-  min-height: clamp(34rem, 56vw, 43rem);
+  display: flex;
+  min-height: clamp(23rem, 34vw, 27rem);
+  padding: clamp(1rem, 2.5vw, 2rem);
   position: relative;
 }
 
 .home-hero-action {
-  bottom: 2rem;
-  left: -2.2rem;
-  max-width: 22rem;
-  padding: clamp(1.4rem, 3vw, 2rem);
-  position: absolute;
+  margin-left: clamp(-4rem, -5vw, -2rem);
+  max-width: 24rem;
+  padding: clamp(1.2rem, 2.4vw, 1.7rem);
+  position: relative;
+  width: 100%;
+}
+
+.home-hero-action-image {
+  border: 1px solid var(--glass-border);
+  border-radius: 0.25rem;
+  height: 3.5rem;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  width: 100%;
 }
 
 .home-hero-action h2 {
-  font-size: 2rem;
-  margin-bottom: 0.85rem;
+  font-size: 1.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .home-hero-action p:not(.utility-label) {
@@ -355,7 +369,28 @@ figure:last-child {
 
 .story-section {
   border-top: 1px solid var(--rule);
-  padding: clamp(5rem, 9vw, 7.5rem) 0 clamp(4.5rem, 8vw, 6.5rem);
+  background: var(--soft-third);
+  padding: clamp(3.75rem, 6vw, 5rem) 0;
+}
+
+.section-rail {
+  align-items: center;
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  justify-content: space-between;
+  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+.section-rail .section-label {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.section-rail > p:last-child {
+  color: var(--muted);
+  margin: 0;
+  max-width: 38rem;
+  text-align: right;
 }
 
 .editorial-heading {
@@ -397,21 +432,21 @@ figure:last-child {
 }
 
 #homepageCarousel .carousel-item img {
-  height: clamp(32rem, 52vw, 41rem);
+  height: clamp(25rem, 39vw, 31rem);
   object-fit: cover;
 }
 
 #homepageCarousel .carousel-caption {
-  bottom: 2rem;
-  left: 2rem;
+  bottom: 1.5rem;
+  left: 1.5rem;
   max-width: 29rem;
-  padding: clamp(1.35rem, 3vw, 2rem);
+  padding: clamp(1.2rem, 2.5vw, 1.7rem);
   right: auto;
   text-align: left;
 }
 
 #homepageCarousel .carousel-caption h2 {
-  font-size: clamp(2rem, 4.2vw, 3.35rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
   margin-bottom: 0.8rem;
 }
 
@@ -423,7 +458,7 @@ figure:last-child {
 .carousel-control-prev,
 .carousel-control-next {
   background: color-mix(in srgb, var(--brand-primary) 88%, transparent);
-  bottom: 2rem;
+  bottom: 1.5rem;
   height: 2.7rem;
   opacity: 1;
   top: auto;
@@ -432,11 +467,11 @@ figure:last-child {
 
 .carousel-control-prev {
   left: auto;
-  right: 5rem;
+  right: 4.5rem;
 }
 
 .carousel-control-next {
-  right: 2rem;
+  right: 1.5rem;
 }
 
 .carousel-control-prev-icon,
@@ -522,8 +557,73 @@ figure:last-child {
   overflow-wrap: anywhere;
 }
 
+.fundraising-section {
+  background: var(--soft-secondary);
+  border-top: 1px solid var(--rule);
+  padding: clamp(3.75rem, 6vw, 5rem) 0;
+}
+
+.fundraising-photo {
+  align-items: center;
+  background-image: var(--brand-image-6, none);
+  background-position: center;
+  background-size: cover;
+  border-radius: 0.45rem;
+  display: flex;
+  min-height: clamp(24rem, 36vw, 29rem);
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+.fundraising-panel {
+  max-width: 38rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  width: 100%;
+}
+
+.fundraising-panel h2,
+.contact-strip h2 {
+  font-size: clamp(2.1rem, 4vw, 3.25rem);
+  margin-bottom: 0.85rem;
+}
+
+.fundraising-panel > p:not(.section-label) {
+  max-width: 34rem;
+}
+
+.contact-strip {
+  background: var(--soft-primary);
+  border-top: 1px solid var(--rule);
+  padding: clamp(3.25rem, 5vw, 4.25rem) 0;
+}
+
+.contact-strip-grid {
+  align-items: start;
+  display: grid;
+  gap: clamp(2rem, 6vw, 6rem);
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+}
+
+.contact-strip .contact-details {
+  margin-top: 0;
+}
+
 .route-intro {
-  padding: clamp(4.5rem, 9vw, 7.5rem) 0 clamp(4rem, 8vw, 6.5rem);
+  border-bottom: 1px solid var(--rule);
+  padding: clamp(2.75rem, 4.5vw, 3.5rem) 0;
+}
+
+.page-about .route-intro,
+.page-gallery .route-intro {
+  background: var(--soft-third);
+}
+
+.page-cats .route-intro,
+.page-contact .route-intro {
+  background: var(--soft-secondary);
+}
+
+.page-events .route-intro {
+  background: var(--soft-primary);
 }
 
 .route-intro-copy {
@@ -532,8 +632,8 @@ figure:last-child {
 }
 
 .route-intro-copy h1 {
-  font-size: clamp(3.2rem, 6vw, 5rem);
-  margin: 0 0 1.35rem;
+  font-size: clamp(2.8rem, 5vw, 4.25rem);
+  margin: 0 0 1rem;
   max-width: 11ch;
 }
 
@@ -553,7 +653,7 @@ figure:last-child {
 .about-intro-grid {
   align-items: center;
   display: grid;
-  gap: clamp(2rem, 6vw, 6rem);
+  gap: clamp(2rem, 5vw, 5rem);
   grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
 }
 
@@ -572,8 +672,8 @@ figure:last-child {
 }
 
 .about-intro-figure img {
-  aspect-ratio: 5 / 4;
   border-radius: 0.4rem;
+  height: clamp(19rem, 29vw, 23rem);
   object-fit: cover;
   width: 100%;
 }
@@ -593,13 +693,14 @@ figure:last-child {
 
 .mission-section {
   border-top: 1px solid var(--rule);
-  padding: clamp(4.5rem, 9vw, 8rem) 0;
+  background: linear-gradient(110deg, var(--soft-secondary), var(--soft-third));
+  padding: clamp(3.75rem, 6vw, 5.25rem) 0;
 }
 
 .mission-layout {
   align-items: center;
   display: grid;
-  gap: clamp(2.5rem, 7vw, 7rem);
+  gap: 0;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
 }
 
@@ -608,14 +709,17 @@ figure:last-child {
 }
 
 .mission-image {
-  height: clamp(28rem, 50vw, 38rem);
+  border-radius: 0.4rem;
+  height: clamp(23rem, 36vw, 29rem);
   object-fit: cover;
   width: 100%;
 }
 
 .mission-copy {
-  border-top: 1px solid var(--rule-strong);
-  padding-top: 2rem;
+  margin-left: clamp(-5rem, -6vw, -3rem);
+  padding: clamp(1.5rem, 3.25vw, 2.5rem);
+  position: relative;
+  z-index: 2;
 }
 
 .mission-copy p:not(.section-label) {
@@ -627,16 +731,23 @@ figure:last-child {
 .people-section,
 .collection-section,
 .gallery-section {
-  background: var(--paper);
+  background: var(--soft-primary);
   border-top: 1px solid var(--rule);
-  padding: clamp(5rem, 9vw, 7.5rem) 0 clamp(5.5rem, 10vw, 8rem);
+  padding: clamp(3.75rem, 6vw, 5rem) 0;
+}
+
+.people-section,
+.gallery-section {
+  background: var(--soft-third);
 }
 
 .card {
-  background: var(--paper);
-  border: 1px solid var(--rule) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(125%);
+  backdrop-filter: blur(10px) saturate(125%);
+  background: color-mix(in srgb, var(--brand-fourth) 70%, transparent);
+  border: 1px solid var(--glass-border) !important;
   border-radius: 0.35rem;
-  box-shadow: none;
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--brand-primary) 10%, transparent);
   color: var(--copy);
   overflow: hidden;
 }
@@ -675,14 +786,14 @@ figure:last-child {
 .contact-intro-grid {
   align-items: center;
   display: grid;
-  gap: clamp(2rem, 6vw, 6rem);
+  gap: clamp(2rem, 5vw, 5rem);
   grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
 }
 
 .cats-intro-photo {
   background-image: var(--brand-image-2, none);
   background-position: center 42%;
-  min-height: clamp(25rem, 43vw, 34rem);
+  min-height: clamp(18rem, 27vw, 22rem);
 }
 
 .collection-heading {
@@ -729,25 +840,31 @@ figure:last-child {
   background-position: center 47%;
   background-size: cover;
   border-radius: 0.4rem;
-  min-height: clamp(24rem, 41vw, 32rem);
+  min-height: clamp(15rem, 22vw, 18rem);
 }
 
 .events-list-section {
+  background: var(--soft-secondary);
   border-top: 1px solid var(--rule);
-  padding: clamp(5rem, 9vw, 7.5rem) 0;
+  padding: clamp(3.75rem, 6vw, 5rem) 0;
 }
 
 .event-list {
-  border-bottom: 1px solid var(--rule-strong);
+  display: grid;
+  gap: 1rem;
 }
 
 .event-card {
+  -webkit-backdrop-filter: blur(10px) saturate(125%);
+  backdrop-filter: blur(10px) saturate(125%);
   align-items: center;
-  border-top: 1px solid var(--rule-strong);
+  background: color-mix(in srgb, var(--brand-fourth) 68%, transparent);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.35rem;
   display: grid;
-  gap: clamp(1.5rem, 5vw, 4.5rem);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
   grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
-  padding: clamp(1.5rem, 4vw, 3rem) 0;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
 }
 
 .event-card-media {
@@ -781,14 +898,16 @@ figure:last-child {
 }
 
 .calendar-section {
-  background: var(--soft-primary);
+  background: linear-gradient(120deg, var(--soft-primary), var(--soft-third));
   border-top: 1px solid var(--rule);
-  padding: clamp(5rem, 9vw, 7.5rem) 0;
+  padding: clamp(3.75rem, 6vw, 5rem) 0;
 }
 
 .cccs-calendar {
-  background: var(--paper);
-  border: 1px solid var(--rule-strong);
+  -webkit-backdrop-filter: blur(10px) saturate(125%);
+  backdrop-filter: blur(10px) saturate(125%);
+  background: color-mix(in srgb, var(--brand-fourth) 72%, transparent);
+  border: 1px solid var(--glass-border);
   border-radius: 0.3rem;
   overflow: hidden;
 }
@@ -837,7 +956,7 @@ figure:last-child {
 
 .cccs-calendar-days {
   border-left: 1px solid var(--rule);
-  grid-template-rows: repeat(4, minmax(9.5rem, auto));
+  grid-template-rows: repeat(4, minmax(7.5rem, auto));
 }
 
 .cccs-calendar-weekday {
@@ -858,7 +977,7 @@ figure:last-child {
   border-right: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
-  min-height: 9.5rem;
+  min-height: 7.5rem;
   padding: 0.7rem;
   position: relative;
 }
@@ -930,6 +1049,42 @@ figure:last-child {
   padding: 1.25rem 2rem;
 }
 
+.calendar-agenda-wrap {
+  border-top: 1px solid var(--rule-strong);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.calendar-agenda {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.calendar-agenda-item {
+  background: color-mix(in srgb, var(--brand-fourth) 58%, transparent);
+  border: 1px solid var(--glass-border);
+  border-top: 3px solid var(--brand-third);
+  padding: 1.25rem;
+}
+
+.calendar-agenda-item h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.55rem;
+}
+
+.calendar-agenda-meta {
+  color: var(--brand-primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.8rem;
+}
+
+.calendar-agenda-item > p:last-child {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
 .gallery-intro-grid,
 .contact-intro-grid {
   grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
@@ -938,33 +1093,22 @@ figure:last-child {
 .gallery-intro-photo {
   background-image: var(--brand-image-4, none);
   background-position: center 43%;
-  min-height: clamp(26rem, 45vw, 35rem);
+  min-height: clamp(18rem, 27vw, 22rem);
 }
 
 .gallery-grid {
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2.25rem);
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .gallery-item {
-  grid-column: span 4;
   min-width: 0;
-}
-
-.gallery-item:nth-of-type(1),
-.gallery-item:nth-of-type(5) {
-  grid-column: span 8;
 }
 
 .gallery-card .card-img-top {
   aspect-ratio: 4 / 3;
   width: 100%;
-}
-
-.gallery-item:nth-of-type(1) .card-img-top,
-.gallery-item:nth-of-type(5) .card-img-top {
-  aspect-ratio: 2 / 1;
 }
 
 .gallery-card figcaption {
@@ -988,25 +1132,26 @@ figure:last-child {
 .contact-intro-photo {
   background-image: var(--brand-image-5, none);
   background-position: center 48%;
-  min-height: clamp(25rem, 43vw, 34rem);
+  min-height: clamp(18rem, 27vw, 22rem);
 }
 
 .contact-section {
+  background: linear-gradient(110deg, var(--soft-secondary), var(--soft-primary));
   border-top: 1px solid var(--rule);
-  padding: clamp(5rem, 9vw, 8rem) 0;
+  padding: clamp(3.75rem, 6vw, 5rem) 0;
 }
 
 .contact-layout {
   align-items: stretch;
   display: grid;
-  gap: clamp(3rem, 8vw, 8rem);
+  gap: clamp(2.5rem, 6vw, 6rem);
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
 }
 
 .contact-information {
   align-self: center;
   min-width: 0;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .contact-information > p:not(.section-label) {
@@ -1028,7 +1173,7 @@ figure:last-child {
   background-position: center;
   background-size: cover;
   border-radius: 0.4rem;
-  min-height: 34rem;
+  min-height: 27rem;
   position: relative;
 }
 
@@ -1063,7 +1208,7 @@ figure:last-child {
   background: var(--brand-primary);
   border-top: 3px solid var(--brand-secondary);
   color: var(--brand-fourth);
-  padding: clamp(3.5rem, 7vw, 5.5rem) 0 2.5rem;
+  padding: clamp(3rem, 5vw, 4.25rem) 0 2rem;
 }
 
 .site-footer .brand-mark {
@@ -1160,7 +1305,7 @@ figure:last-child {
   }
 
   .home-hero-action {
-    left: 1.5rem;
+    margin-left: 0;
   }
 
   .about-intro-note {
@@ -1173,7 +1318,13 @@ figure:last-child {
   }
 
   .mission-copy {
+    margin-left: 0;
     max-width: 42rem;
+  }
+
+  .gallery-grid,
+  .calendar-agenda {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .community-heading,
@@ -1202,7 +1353,7 @@ figure:last-child {
 
   .home-hero,
   .route-intro {
-    padding: 3.5rem 0 4.5rem;
+    padding: 2.25rem 0;
   }
 
   .home-hero-grid,
@@ -1212,22 +1363,37 @@ figure:last-child {
   .contact-intro-grid,
   .mission-layout,
   .contact-layout {
-    gap: 2.25rem;
+    gap: 1.75rem;
   }
 
   .home-hero-title,
   .route-intro-copy h1 {
-    font-size: clamp(3rem, 15vw, 4.15rem);
+    font-size: clamp(2.7rem, 13vw, 3.55rem);
   }
 
   .home-hero-photo {
-    min-height: 34rem;
+    min-height: 17.5rem;
+    padding: 1rem;
   }
 
   .home-hero-action {
-    bottom: 1rem;
-    left: 1rem;
-    max-width: calc(100% - 2rem);
+    bottom: auto;
+    left: auto;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .section-rail {
+    align-items: start;
+    display: block;
+  }
+
+  .section-rail .section-label {
+    margin-bottom: 1rem;
+  }
+
+  .section-rail > p:last-child {
+    text-align: left;
   }
 
   .editorial-heading,
@@ -1245,7 +1411,7 @@ figure:last-child {
   }
 
   #homepageCarousel .carousel-item img {
-    height: 37rem;
+    height: 27rem;
   }
 
   #homepageCarousel .carousel-caption {
@@ -1299,11 +1465,12 @@ figure:last-child {
   .gallery-intro-photo,
   .contact-intro-photo,
   .events-intro-photo {
-    min-height: 25rem;
+    height: 14rem;
+    min-height: 14rem;
   }
 
   .mission-image {
-    height: 29rem;
+    height: 18rem;
   }
 
   .collection-heading,
@@ -1350,7 +1517,12 @@ figure:last-child {
   }
 
   .contact-note-photo {
-    min-height: 30rem;
+    min-height: 24rem;
+  }
+
+  .contact-strip-grid,
+  .calendar-agenda {
+    grid-template-columns: 1fr;
   }
 
   .contact-details > div,
@@ -1380,7 +1552,7 @@ figure:last-child {
   }
 
   .home-hero-photo {
-    min-height: 32rem;
+    min-height: 17.5rem;
   }
 }
 

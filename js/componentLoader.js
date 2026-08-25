@@ -1,8 +1,8 @@
 const ComponentLoader = (() => {
   const componentPaths = {
-    header: 'components/header.html?v=3',
-    footer: 'components/footer.html?v=3',
-    calendar: 'components/calendar.html?v=3'
+    header: 'components/header.html?v=4',
+    footer: 'components/footer.html?v=4',
+    calendar: 'components/calendar.html?v=4'
   };
 
   function getText(url) {

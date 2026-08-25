@@ -86,6 +86,8 @@ const CalendarComponent = (() => {
     const eventsByDate = groupEventsByDate(calendarEvents, visibleDateKeys);
     const visibleEventCount = Array.from(eventsByDate.values()).reduce((eventCount, eventList) => eventCount + eventList.length, 0);
 
+    renderAgenda(root, calendarEvents);
+
     if (!grid) {
       return;
     }
@@ -111,6 +113,34 @@ const CalendarComponent = (() => {
     if (emptyMessage) {
       emptyMessage.hidden = visibleEventCount > 0;
     }
+  }
+
+  function renderAgenda(root, calendarEvents) {
+    const agenda = root.querySelector('[data-calendar-agenda]');
+
+    if (!agenda) {
+      return;
+    }
+
+    agenda.innerHTML = '';
+
+    calendarEvents.forEach((calendarEvent) => {
+      const article = document.createElement('article');
+      const eventName = document.createElement('h3');
+      const eventMeta = document.createElement('p');
+      const eventDescription = document.createElement('p');
+
+      article.className = 'calendar-agenda-item';
+      eventName.textContent = calendarEvent.name;
+      eventMeta.className = 'calendar-agenda-meta';
+      eventMeta.textContent = `${calendarEvent.displayDate} · ${calendarEvent.location}`;
+      eventDescription.textContent = calendarEvent.description;
+
+      article.appendChild(eventName);
+      article.appendChild(eventMeta);
+      article.appendChild(eventDescription);
+      agenda.appendChild(article);
+    });
   }
 
   function createDayCell(visibleDate, dayIndex, weekStart, today, dayEvents) {

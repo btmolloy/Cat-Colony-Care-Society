@@ -46,7 +46,7 @@ const CmsTheme = (() => {
     const googleDriveFileId = getGoogleDriveFileId(url);
 
     if (googleDriveFileId) {
-      return `https://drive.google.com/thumbnail?id=${googleDriveFileId}&sz=w1800`;
+      return `https://lh3.googleusercontent.com/d/${googleDriveFileId}=w1800`;
     }
 
     if (/^https?:\/\//i.test(url)) {
