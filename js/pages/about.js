@@ -1,4 +1,6 @@
 CmsPage.init({
-  sheetNames: ['About_E_Board', 'About_Mission'],
+  sheetNames: ['About_E_Board', 'About_Mission', 'Call_To_Action'],
   loadedMessage: 'About page CMS content loaded.'
-}).catch(CmsPage.showError);
+})
+  .then(() => SiteInteractions.init())
+  .catch(CmsPage.showError);

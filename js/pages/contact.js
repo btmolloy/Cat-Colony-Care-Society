@@ -1,4 +1,6 @@
 CmsPage.init({
-  sheetNames: [],
-  loadedMessage: 'Contact CMS content loaded.'
-}).catch(CmsPage.showError);
+  sheetNames: ['Call_To_Action', 'Go_Fund_Me'],
+  loadedMessage: 'Get involved CMS content loaded.'
+})
+  .then(() => SiteInteractions.init())
+  .catch(CmsPage.showError);

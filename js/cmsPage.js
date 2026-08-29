@@ -23,8 +23,13 @@ const CmsPage = (() => {
 
     document.querySelectorAll('[data-nav-link]').forEach((link) => {
       const href = link.getAttribute('href');
+      const aliases = String(link.dataset.navAlias || '')
+        .split(/[\s,]+/)
+        .map((alias) => alias.trim())
+        .filter(Boolean);
+      const isActive = href === currentPage || aliases.includes(currentPage);
 
-      if (href === currentPage) {
+      if (isActive) {
         link.classList.add('active');
         link.setAttribute('aria-current', 'page');
       } else {

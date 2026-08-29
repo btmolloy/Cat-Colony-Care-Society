@@ -1,5 +1,5 @@
 const CmsCache = (() => {
-  const cacheKeyPrefix = 'cccsCmsSheet:v2:';
+  const cacheKeyPrefix = 'cccsCmsSheet:v3:';
   const defaultCacheMinutes = 10;
 
   function getCacheKey(sheetName) {
@@ -52,10 +52,13 @@ const CmsCache = (() => {
   async function loadPageContent(sheetNames, options = {}) {
     const cmsArrays = {};
 
-    for (const sheetName of sheetNames) {
-      const parsedSheet = await getSheet(sheetName, options);
+    const parsedSheets = await Promise.all(
+      sheetNames.map((sheetName) => getSheet(sheetName, options))
+    );
+
+    parsedSheets.forEach((parsedSheet) => {
       cmsArrays[parsedSheet.name] = parsedSheet.value;
-    }
+    });
 
     window.cmsArrays = {
       ...(window.cmsArrays || {}),

@@ -1,69 +1,108 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="no-referrer">
-  <meta name="theme-color" content="">
-  <title>Gallery | Cat Colony Care Society</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <script src="js/cmsTheme.js?v=2"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/site.css?v=7" rel="stylesheet">
-</head>
-<body class="page-gallery">
-  <div data-component="header"></div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="">
+    <meta name="description" content="" data-cms-content="gallery.GalleryDescription">
+    <meta property="og:title" content="Gallery" data-cms-content="gallery.GalleryTitle">
+    <meta property="og:description" content="" data-cms-content="gallery.GalleryDescription">
+    <title>Gallery | Cat Colony Care Society</title>
+    <script src="js/cmsTheme.js?v=4"></script>
+    <link rel="stylesheet" href="css/site.css?v=12">
+  </head>
+  <body data-page="gallery" data-title-path="gallery.GalleryTitle">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div data-component="header"></div>
 
-  <main>
-    <section class="route-intro gallery-intro">
-      <div class="container">
-        <div class="gallery-intro-grid">
-          <div class="route-intro-copy">
-            <p class="section-label">Life through our lens</p>
-            <h1 data-cms-text="gallery.GalleryTitle"></h1>
-            <p data-cms-text="gallery.GalleryDescription"></p>
+    <main id="main-content">
+      <header
+        class="page-masthead"
+        style="--masthead-image: var(--brand-image-5, none)"
+        data-cms-bg="branding.backgroundimage5"
+        data-cms-bg-var="--masthead-image"
+      >
+        <div class="container masthead-inner">
+          <div class="masthead-copy">
+            <p class="eyebrow eyebrow-light">From around the colony</p>
+            <h1 class="page-title" data-cms-text="gallery.GalleryTitle"></h1>
+            <p class="page-lede" data-cms-text="gallery.GalleryDescription"></p>
           </div>
-          <div class="route-photo gallery-intro-photo" role="img" aria-label="Campus cat in the colony"></div>
+          <p class="masthead-index">Page 05<strong>Image, caption, credit</strong></p>
         </div>
-      </div>
-    </section>
+      </header>
 
-    <section class="gallery-section">
-      <div class="container">
-        <div class="section-rail">
-          <p class="section-label">Colony gallery</p>
-          <p data-cms-text="gallery.GalleryDescription"></p>
-        </div>
-        <div class="gallery-grid" data-cms-repeat="gallery">
-          <template>
-            <div class="gallery-item">
-              <figure class="card gallery-card h-100 mb-0">
-                <img class="card-img-top" data-cms-src="$item.Image" data-cms-alt="$item.Description" alt="Gallery image" loading="lazy">
-                <figcaption class="card-body">
-                  <p data-cms-text="$item.Description"></p>
-                  <div class="gallery-meta">
-                    <span data-cms-text="$item.Date"></span>
-                    <span>Credit: <span data-cms-text="$item.Credit"></span></span>
-                  </div>
+      <section class="section section-white">
+        <div class="container">
+          <div class="section-heading" data-reveal>
+            <p
+              class="eyebrow"
+              data-cms-count="gallery"
+              data-cms-count-singular="photograph"
+              data-cms-count-plural="photographs"
+            ></p>
+            <div class="section-heading-copy">
+              <h2 class="section-title" data-cms-text="gallery.GalleryTitle"></h2>
+              <p class="section-lede" data-cms-text="gallery.GalleryDescription"></p>
+            </div>
+          </div>
+
+          <div class="gallery-grid" data-cms-repeat="gallery">
+            <template>
+              <figure class="gallery-item" data-reveal>
+                <a
+                  class="gallery-photo-link"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cms-href="$item.Image"
+                >
+                  <div
+                    class="photo-surface"
+                    style="--photo: var(--brand-image-5, none)"
+                    data-cms-bg="$item.Image"
+                    data-cms-title="$item.Description"
+                  ></div>
+                </a>
+                <figcaption class="glass-card gallery-glass-caption">
+                  <span class="gallery-caption" data-cms-text="$item.Description"></span>
+                  <span class="gallery-meta">
+                    <time
+                      data-cms-text="$item.Date"
+                      data-cms-datetime="$item.Date"
+                      data-calendar-date
+                      data-calendar-date-style="compact"
+                    ></time><br>
+                    <span data-cms-text="$item.Credit"></span>
+                  </span>
                 </figcaption>
               </figure>
-            </div>
-          </template>
+            </template>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <div data-component="footer"></div>
+      <section class="closing-band">
+        <div class="container closing-grid" data-reveal>
+          <div class="closing-copy">
+            <p class="eyebrow eyebrow-light">Connect with the society</p>
+            <h2 class="closing-title" data-cms-text="branding.Title"></h2>
+            <p data-cms-text="branding.Description"></p>
+          </div>
+          <a class="button" href="get-involved.html">Contact CCCS</a>
+        </div>
+      </section>
+    </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/cmsContentLoader.js"></script>
-  <script src="js/cmsCache.js"></script>
-  <script src="js/componentLoader.js?v=4"></script>
-  <script src="js/cmsBinder.js?v=2"></script>
-  <script src="js/cmsPage.js"></script>
-  <script src="js/pages/gallery.js"></script>
-</body>
+    <div data-component="footer"></div>
+
+    <script src="js/cmsContentLoader.js"></script>
+    <script src="js/cmsCache.js?v=3"></script>
+    <script src="js/componentLoader.js?v=6"></script>
+    <script src="js/cmsBinder.js?v=4"></script>
+    <script src="js/cmsPage.js?v=4"></script>
+    <script src="js/calendarComponent.js?v=5"></script>
+    <script src="js/siteInteractions.js?v=2"></script>
+    <script src="js/pages/gallery.js?v=4"></script>
+  </body>
 </html>

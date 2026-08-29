@@ -71,7 +71,7 @@ const CmsTheme = (() => {
       if (color) {
         root.style.setProperty(propertyName, color);
 
-        if (fieldName === 'ForthColor' && themeColorMeta) {
+        if (fieldName === 'PrimaryColor' && themeColorMeta) {
           themeColorMeta.setAttribute('content', color);
         }
       }
@@ -90,7 +90,7 @@ const CmsTheme = (() => {
 
   function applyCached() {
     try {
-      const rawCache = localStorage.getItem('cccsCmsSheet:v2:Site_Branding');
+      const rawCache = localStorage.getItem('cccsCmsSheet:v3:Site_Branding');
 
       if (!rawCache) {
         return;

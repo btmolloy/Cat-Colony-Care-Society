@@ -1,41 +1,29 @@
-<header class="site-header">
-  <div class="announcement-bar">
-    <div class="container d-flex justify-content-between gap-3">
-      <span class="announcement-copy">
-        <span data-cms-text="branding.Description"></span>
+<header class="site-header" data-header>
+  <div class="nav-shell glass-nav">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand-mark" aria-hidden="true">
+        <img data-cms-src="branding.ClubLogo" alt="">
       </span>
-      <span class="announcement-contact">
-        <span class="announcement-email-label">Email:</span>
-        <span data-cms-text="contact.Email"></span>
-        <span aria-hidden="true">•</span>
-        <a href="#" data-cms-href="contact.InstagramURL">Instagram</a>
+      <span class="brand-copy">
+        <strong data-cms-text="branding.Abreviation"></strong>
+        <small data-cms-text="branding.Title"></small>
       </span>
-    </div>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+      <span class="sr-only">Toggle navigation</span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+    <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
+      <a href="index.html" data-nav-link>Home</a>
+      <a href="about.html" data-nav-link>About</a>
+      <a href="colony.html" data-nav-link data-nav-alias="campus-cats.html">Our colony</a>
+      <a href="events.html" data-nav-link>Events</a>
+      <a href="gallery.html" data-nav-link>Gallery</a>
+    </nav>
+
+    <a class="button button-small nav-action" href="get-involved.html" data-nav-link data-nav-alias="contact.html">Get involved</a>
   </div>
-  <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <span class="brand-mark">
-          <img data-cms-src="branding.ClubLogo" alt="Cat Colony Care Society logo">
-        </span>
-        <span class="brand-copy">
-          <span class="brand-name" data-cms-text="branding.Title"></span>
-          <span class="brand-tagline" data-cms-text="branding.Description"></span>
-        </span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="mainNav" class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html" data-nav-link>Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html" data-nav-link>About</a></li>
-          <li class="nav-item"><a class="nav-link" href="campus-cats.html" data-nav-link>Campus Cats</a></li>
-          <li class="nav-item"><a class="nav-link" href="events.html" data-nav-link>Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="gallery.html" data-nav-link>Gallery</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html" data-nav-link>Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 </header>

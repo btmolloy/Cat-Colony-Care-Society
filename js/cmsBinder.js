@@ -9,11 +9,11 @@ const CmsBinder = (() => {
     }
 
     if (path === '$index') {
-      return context.index;
+      return Number.isInteger(context.index) ? context.index : undefined;
     }
 
     if (path === '$number') {
-      return context.index + 1;
+      return Number.isInteger(context.index) ? context.index + 1 : undefined;
     }
 
     if (path.startsWith('$item.')) {
@@ -69,6 +69,123 @@ const CmsBinder = (() => {
     }
   }
 
+  function isPlaceholderValue(value) {
+    return /temporary[_\s-]*value[_\s-]*here/i.test(String(value || ''));
+  }
+
+  function normalizeHref(value) {
+    const url = String(value || '').trim();
+
+    if (!url || isPlaceholderValue(url)) {
+      return '';
+    }
+
+    if (/^(?:https?:|mailto:|tel:|#|\/)/i.test(url) || /^[^.\/]+\.html(?:[?#].*)?$/i.test(url)) {
+      return url;
+    }
+
+    if (/^[\w.-]+\.[a-z]{2,}(?:[/?#].*)?$/i.test(url)) {
+      return `https://${url}`;
+    }
+
+    return '';
+  }
+
+  function bindHref(element, context) {
+    if (!element.dataset.cmsHref) {
+      return;
+    }
+
+    const rawValue = resolvePath(element.dataset.cmsHref, context);
+
+    if (element.dataset.cmsHref.startsWith('$item') && !context.item) {
+      return;
+    }
+
+    const href = normalizeHref(rawValue);
+
+    if (href) {
+      element.setAttribute('href', href);
+      element.removeAttribute('aria-disabled');
+      element.classList.remove('is-placeholder');
+      return;
+    }
+
+    element.removeAttribute('href');
+    element.setAttribute('aria-disabled', 'true');
+    element.classList.add('is-placeholder');
+  }
+
+  function bindMailto(element, context) {
+    if (!element.dataset.cmsMailto) {
+      return;
+    }
+
+    if (element.dataset.cmsMailto.startsWith('$item') && !context.item) {
+      return;
+    }
+
+    const email = String(resolvePath(element.dataset.cmsMailto, context) || '').trim();
+
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      element.removeAttribute('href');
+      element.setAttribute('aria-disabled', 'true');
+      return;
+    }
+
+    const parameters = new URLSearchParams();
+
+    if (element.dataset.cmsMailtoSubject) {
+      parameters.set('subject', element.dataset.cmsMailtoSubject);
+    }
+
+    if (element.dataset.cmsMailtoBody) {
+      parameters.set('body', element.dataset.cmsMailtoBody);
+    }
+
+    const query = parameters.toString();
+    element.setAttribute('href', `mailto:${email}${query ? `?${query}` : ''}`);
+    element.removeAttribute('aria-disabled');
+  }
+
+  function isBindableImage(value) {
+    const url = String(value || '').trim();
+
+    return Boolean(url) && !/instagram\.com\/(?:p|reel)\//i.test(url) && !isPlaceholderValue(url);
+  }
+
+  function bindBackground(element, context) {
+    if (!element.dataset.cmsBg) {
+      return;
+    }
+
+    const rawValue = resolvePath(element.dataset.cmsBg, context);
+
+    if (!isBindableImage(rawValue)) {
+      return;
+    }
+
+    const imageUrl = normalizeImageSrc(rawValue);
+    const propertyName = element.dataset.cmsBgVar || '--photo';
+    const escapedImageUrl = imageUrl.replace(/(["\\])/g, '\\$1');
+
+    element.style.setProperty(propertyName, `url("${escapedImageUrl}")`);
+  }
+
+  function bindCount(element, context) {
+    if (!element.dataset.cmsCount) {
+      return;
+    }
+
+    const value = resolvePath(element.dataset.cmsCount, context);
+    const count = getRepeatItems(value).length;
+    const singular = element.dataset.cmsCountSingular || '';
+    const plural = element.dataset.cmsCountPlural || singular;
+    const label = count === 1 ? singular : plural;
+
+    element.textContent = `${count}${label ? ` ${label}` : ''}`;
+  }
+
   function normalizeImageSrc(value) {
     const url = String(value).trim();
     const googleDriveFileId = getGoogleDriveFileId(url);
@@ -113,10 +230,15 @@ const CmsBinder = (() => {
       bindHtml(element, context);
     }
 
-    bindAttribute(element, 'cmsHref', 'href', context);
+    bindHref(element, context);
+    bindMailto(element, context);
     bindAttribute(element, 'cmsSrc', 'src', context);
     bindAttribute(element, 'cmsAlt', 'alt', context);
     bindAttribute(element, 'cmsTitle', 'title', context);
+    bindAttribute(element, 'cmsDatetime', 'datetime', context);
+    bindAttribute(element, 'cmsContent', 'content', context);
+    bindBackground(element, context);
+    bindCount(element, context);
     bindFirstClass(element, context);
   }
 
@@ -161,7 +283,11 @@ const CmsBinder = (() => {
   function bind(root = document, context = {}) {
     root.querySelectorAll('[data-cms-repeat]').forEach(bindRepeater);
 
-    root.querySelectorAll('[data-cms-text], [data-cms-html], [data-cms-href], [data-cms-src], [data-cms-alt], [data-cms-title], [data-cms-first-class]').forEach((element) => {
+    root.querySelectorAll('[data-cms-text], [data-cms-html], [data-cms-href], [data-cms-mailto], [data-cms-src], [data-cms-alt], [data-cms-title], [data-cms-datetime], [data-cms-content], [data-cms-bg], [data-cms-count], [data-cms-first-class]').forEach((element) => {
+      if (!context.item && element.closest('[data-cms-repeat-item]')) {
+        return;
+      }
+
       bindElement(element, context);
     });
   }

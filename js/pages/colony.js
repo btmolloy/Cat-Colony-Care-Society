@@ -1,6 +1,6 @@
 CmsPage.init({
   sheetNames: ['Campus_Cats'],
-  loadedMessage: 'Campus cats CMS content loaded.'
+  loadedMessage: 'Colony CMS content loaded.'
 })
   .then(() => SiteInteractions.init())
   .catch(CmsPage.showError);
