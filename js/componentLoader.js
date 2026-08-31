@@ -1,6 +1,6 @@
 const ComponentLoader = (() => {
   const componentPaths = {
-    header: 'components/header.html?v=5',
+    header: 'components/header.html?v=6',
     footer: 'components/footer.html?v=5'
   };
 

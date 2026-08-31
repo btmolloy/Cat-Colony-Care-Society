@@ -234,20 +234,24 @@ a {
 .brand-copy {
   display: grid;
   margin-left: 11px;
-  line-height: 1.15;
+  line-height: 1.08;
 }
 
 .brand-copy strong {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .brand-copy small {
-  margin-top: 3px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 10px;
-  letter-spacing: 0.02em;
+  color: var(--orange);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .primary-nav {
@@ -384,7 +388,7 @@ a {
 }
 
 .home-hero {
-  min-height: max(720px, 100svh);
+  min-height: max(680px, 92svh);
 }
 
 .hero-slide {
@@ -422,12 +426,12 @@ a {
   position: relative;
   z-index: 2;
   display: grid;
-  min-height: max(720px, 100svh);
+  min-height: max(680px, 92svh);
   grid-template-columns: repeat(12, 1fr);
   align-items: end;
   gap: 24px;
   padding-top: 150px;
-  padding-bottom: 128px;
+  padding-bottom: 144px;
 }
 
 .hero-copy {
@@ -579,6 +583,46 @@ a {
   line-height: 1.5;
 }
 
+.glass-callout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.glass-callout-media {
+  min-height: 68px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 10px;
+  background-color: color-mix(in srgb, var(--navy-deep) 28%, transparent);
+  background-image:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), color-mix(in srgb, var(--navy-deep) 18%, transparent)),
+    var(--callout-image);
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.glass-callout h2 {
+  margin: 0 0 7px;
+  font-size: 19px;
+  font-weight: 580;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.glass-callout p {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.48;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .glass-rule {
   position: relative;
   height: 1px;
@@ -595,7 +639,7 @@ a {
 .carousel-controls {
   position: absolute;
   right: 0;
-  bottom: 38px;
+  bottom: 48px;
   left: 0;
   z-index: 5;
   display: flex;
@@ -605,11 +649,13 @@ a {
 }
 
 .carousel-tab {
+  position: relative;
   display: flex;
   min-width: 78px;
   align-items: center;
   gap: 9px;
   padding: 10px 12px;
+  overflow: hidden;
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
@@ -623,7 +669,33 @@ a {
     background-color 150ms ease;
 }
 
+.carousel-tab::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: rgba(255, 255, 255, 0.13);
+  content: "";
+  pointer-events: none;
+}
+
+.carousel-tab.is-active.is-progressing::before {
+  animation: carousel-tab-progress var(--carousel-cycle-duration, 5000ms) linear forwards;
+}
+
+[data-carousel].is-cycle-paused .carousel-tab.is-active.is-progressing::before {
+  animation-play-state: paused;
+}
+
+.carousel-tab > span {
+  position: relative;
+  z-index: 1;
+}
+
 .carousel-tab::after {
+  position: relative;
+  z-index: 1;
   width: 30px;
   height: 2px;
   transform: scaleX(0.35);
@@ -643,6 +715,12 @@ a {
 .carousel-tab.is-active::after {
   transform: scaleX(1);
   background: var(--orange);
+}
+
+@keyframes carousel-tab-progress {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .page-masthead {
@@ -863,6 +941,50 @@ a {
   margin-top: 24px;
 }
 
+.section-index {
+  color: var(--orange-dark);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 740;
+  letter-spacing: 0.12em;
+}
+
+.home-fundraiser {
+  border-bottom: 1px solid var(--line);
+}
+
+.home-fundraiser-grid {
+  align-items: center;
+}
+
+.home-fundraiser-title {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  font-weight: 560;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.home-fundraiser .editorial-main .lead-copy {
+  max-width: 620px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+  line-height: 1.55;
+  letter-spacing: -0.012em;
+}
+
+.editorial-action {
+  grid-column: 11 / -1;
+  justify-self: end;
+}
+
+.editorial-action .button {
+  width: max-content;
+}
+
 .metric-rail {
   grid-column: 11 / -1;
   margin: 0;
@@ -890,6 +1012,45 @@ a {
   margin-top: 5px;
   font-size: 15px;
   font-weight: 580;
+}
+
+.club-rules-heading {
+  margin-bottom: clamp(34px, 5vw, 54px);
+}
+
+.rule-list {
+  padding-inline: clamp(20px, 3vw, 36px);
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.rule-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: clamp(18px, 4vw, 58px);
+  align-items: start;
+  padding-block: clamp(24px, 3.5vw, 38px);
+  border-bottom: 1px solid color-mix(in srgb, var(--navy-ink) 14%, transparent);
+}
+
+.rule-row:last-child {
+  border-bottom: 0;
+}
+
+.rule-number {
+  padding-top: 4px;
+  color: var(--orange-dark);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+}
+
+.rule-row p {
+  max-width: 820px;
+  margin: 0;
+  color: color-mix(in srgb, var(--navy) 82%, var(--brand-fourth));
+  font-size: clamp(1.05rem, 2vw, 1.42rem);
+  line-height: 1.5;
 }
 
 .flat-panel {
@@ -1514,10 +1675,6 @@ a {
     padding-inline: 9px;
   }
 
-  .brand-copy small {
-    display: none;
-  }
-
   .hero-copy {
     grid-column: 1 / span 7;
   }
@@ -1570,9 +1727,9 @@ a {
 
   .brand-copy small {
     display: block;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-width: none;
+    overflow: visible;
+    text-overflow: clip;
     white-space: nowrap;
   }
 
@@ -1645,7 +1802,7 @@ a {
 
   .home-hero,
   .hero-content {
-    min-height: 780px;
+    min-height: max(720px, 92svh);
   }
 
   .hero-content {
@@ -1653,7 +1810,7 @@ a {
     align-content: end;
     gap: 30px;
     padding-top: 128px;
-    padding-bottom: 122px;
+    padding-bottom: 134px;
   }
 
   .hero-copy,
@@ -1685,6 +1842,7 @@ a {
   .section-heading-copy,
   .editorial-aside,
   .editorial-main,
+  .editorial-action,
   .metric-rail {
     grid-column: 1;
   }
@@ -1703,6 +1861,11 @@ a {
 
   .editorial-aside {
     max-width: 280px;
+  }
+
+  .editorial-action {
+    justify-self: start;
+    margin-top: 8px;
   }
 
   .metric-rail {
@@ -1753,24 +1916,62 @@ a {
 }
 
 @media (max-width: 620px) {
-  .brand-copy small {
+  .brand-copy strong {
     display: none;
   }
 
+  .brand-copy small {
+    display: block;
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 0.11em;
+  }
+
   .hero-title {
-    font-size: clamp(2.85rem, 14vw, 4.5rem);
+    font-size: clamp(2.6rem, 13vw, 4.25rem);
   }
 
   .hero-lede {
+    margin-top: 18px;
     font-size: 1rem;
   }
 
+  .hero-actions {
+    margin-top: 24px;
+  }
+
   .hero-glass {
-    padding: 20px;
+    padding: 18px;
+  }
+
+  .glass-label {
+    margin-bottom: 14px;
+  }
+
+  .glass-callout {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .glass-callout-media {
+    min-height: 58px;
+  }
+
+  .glass-callout h2 {
+    font-size: 17px;
+  }
+
+  .glass-callout p {
+    -webkit-line-clamp: 2;
+  }
+
+  .glass-rule {
+    margin: 16px 0 12px;
   }
 
   .carousel-controls {
-    bottom: 22px;
+    bottom: 30px;
   }
 
   .carousel-tab {
@@ -1833,6 +2034,11 @@ a {
     align-items: start;
   }
 
+  .rule-row {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+  }
+
   .event-location {
     grid-column: 2;
     grid-row: auto;
@@ -1880,6 +2086,19 @@ a {
   .footer-bottom {
     display: grid;
     gap: 6px;
+  }
+}
+
+@media (max-width: 340px) {
+  .home-hero,
+  .hero-content {
+    min-height: 860px;
+  }
+
+  .hero-content {
+    gap: 22px;
+    padding-top: 108px;
+    padding-bottom: 108px;
   }
 }
 

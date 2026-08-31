@@ -101,7 +101,92 @@ const SiteInteractions = (() => {
       }
 
       const tabs = buildCarouselTabs(controls, slides, carouselIndex);
+      const cycleDuration = 5000;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const canAutoCycle = slides.length > 1 && !reducedMotion;
+      const pauseReasons = new Set();
       let activeIndex = 0;
+      let cycleTimer = null;
+      let cycleStartedAt = 0;
+      let cycleRemaining = cycleDuration;
+
+      const clearCycleTimer = () => {
+        if (cycleTimer !== null) {
+          window.clearTimeout(cycleTimer);
+          cycleTimer = null;
+        }
+      };
+
+      const scheduleCycle = () => {
+        if (!canAutoCycle || pauseReasons.size || cycleTimer !== null) {
+          return;
+        }
+
+        cycleStartedAt = performance.now();
+        cycleTimer = window.setTimeout(() => {
+          cycleTimer = null;
+          setSlide(activeIndex + 1);
+        }, cycleRemaining);
+      };
+
+      const restartProgress = () => {
+        clearCycleTimer();
+        cycleRemaining = cycleDuration;
+
+        tabs.forEach((tab) => tab.classList.remove('is-progressing'));
+
+        if (canAutoCycle) {
+          const activeTab = tabs[activeIndex];
+
+          if (activeTab) {
+            activeTab.style.setProperty('--carousel-cycle-duration', `${cycleDuration}ms`);
+            void activeTab.offsetWidth;
+            activeTab.classList.add('is-progressing');
+          }
+        }
+
+        scheduleCycle();
+      };
+
+      const pauseCycle = (reason) => {
+        if (!canAutoCycle || pauseReasons.has(reason)) {
+          return;
+        }
+
+        pauseReasons.add(reason);
+
+        if (pauseReasons.size > 1) {
+          return;
+        }
+
+        if (cycleTimer !== null) {
+          cycleRemaining = Math.max(0, cycleRemaining - (performance.now() - cycleStartedAt));
+          clearCycleTimer();
+        }
+
+        carousel.classList.add('is-cycle-paused');
+      };
+
+      const resumeCycle = (reason) => {
+        if (!canAutoCycle || !pauseReasons.has(reason)) {
+          return;
+        }
+
+        pauseReasons.delete(reason);
+
+        if (pauseReasons.size) {
+          return;
+        }
+
+        carousel.classList.remove('is-cycle-paused');
+
+        if (cycleRemaining <= 0) {
+          setSlide(activeIndex + 1);
+          return;
+        }
+
+        scheduleCycle();
+      };
 
       const setSlide = (nextIndex, options = {}) => {
         activeIndex = (nextIndex + slides.length) % slides.length;
@@ -124,10 +209,26 @@ const SiteInteractions = (() => {
         if (options.focusTab) {
           tabs[activeIndex]?.focus();
         }
+
+        restartProgress();
       };
 
       tabs.forEach((tab, index) => {
         tab.addEventListener('click', () => setSlide(index));
+        tab.addEventListener('pointerenter', () => pauseCycle('pointer'));
+        tab.addEventListener('pointerleave', () => resumeCycle('pointer'));
+        tab.addEventListener('mouseenter', () => pauseCycle('pointer'));
+        tab.addEventListener('mouseleave', () => resumeCycle('pointer'));
+        tab.addEventListener('focus', () => pauseCycle('focus'));
+        tab.addEventListener('blur', () => resumeCycle('focus'));
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          pauseCycle('visibility');
+        } else {
+          resumeCycle('visibility');
+        }
       });
 
       carousel.addEventListener('keydown', (event) => {
@@ -175,7 +276,10 @@ const SiteInteractions = (() => {
       tab.setAttribute('aria-controls', slideId);
       tab.setAttribute('aria-label', title ? `Show ${title}` : `Show slide ${slideIndex + 1}`);
       tab.dataset.slideTo = String(slideIndex);
-      tab.textContent = String(slideIndex + 1).padStart(2, '0');
+      const label = document.createElement('span');
+
+      label.textContent = String(slideIndex + 1).padStart(2, '0');
+      tab.appendChild(label);
       controls.appendChild(tab);
 
       return tab;
