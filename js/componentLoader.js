@@ -1,7 +1,7 @@
 const ComponentLoader = (() => {
   const componentPaths = {
-    header: 'components/header.html?v=6',
-    footer: 'components/footer.html?v=5'
+    header: 'components/header.html?v=7',
+    footer: 'components/footer.html?v=6'
   };
 
   function getText(url) {

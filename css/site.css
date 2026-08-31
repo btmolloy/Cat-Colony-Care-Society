@@ -1598,6 +1598,21 @@ a {
   text-transform: uppercase;
 }
 
+.site-credit {
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.site-credit a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+}
+
+.site-credit a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
 
 .brand-mark img {
   position: relative;
