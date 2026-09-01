@@ -10,7 +10,7 @@
     <meta property="og:description" content="" data-cms-content="gallery.GalleryDescription">
     <title>Gallery | Cat Colony Care Society</title>
     <script src="js/cmsTheme.js?v=4"></script>
-    <link rel="stylesheet" href="css/site.css?v=17">
+    <link rel="stylesheet" href="css/site.css?v=19">
   </head>
   <body data-page="gallery" data-title-path="gallery.GalleryTitle">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -29,23 +29,19 @@
             <h1 class="page-title" data-cms-text="gallery.GalleryTitle"></h1>
             <p class="page-lede" data-cms-text="gallery.GalleryDescription"></p>
           </div>
-          <p class="masthead-index">Page 05<strong>Image, caption, credit</strong></p>
         </div>
       </header>
 
-      <section class="section section-white">
+      <section class="section section-white gallery-section">
         <div class="container">
-          <div class="section-heading" data-reveal>
+          <div class="gallery-toolbar" data-reveal>
             <p
               class="eyebrow"
               data-cms-count="gallery"
               data-cms-count-singular="photograph"
               data-cms-count-plural="photographs"
             ></p>
-            <div class="section-heading-copy">
-              <h2 class="section-title" data-cms-text="gallery.GalleryTitle"></h2>
-              <p class="section-lede" data-cms-text="gallery.GalleryDescription"></p>
-            </div>
+            <p class="gallery-sort-label">Newest first</p>
           </div>
 
           <div class="gallery-grid" data-cms-repeat="gallery">
@@ -72,13 +68,20 @@
                       data-cms-datetime="$item.Date"
                       data-calendar-date
                       data-calendar-date-style="compact"
-                    ></time><br>
-                    <span data-cms-text="$item.Credit"></span>
+                    ></time>
+                    <span class="gallery-credit" data-cms-text="$item.Credit"></span>
                   </span>
                 </figcaption>
               </figure>
             </template>
           </div>
+
+          <nav class="gallery-pagination glass-card" data-gallery-pagination aria-label="Gallery pages" hidden>
+            <button class="gallery-page-direction" type="button" data-gallery-previous>Previous</button>
+            <div class="gallery-page-numbers" data-gallery-page-numbers></div>
+            <button class="gallery-page-direction" type="button" data-gallery-next>Next</button>
+            <p class="sr-only" data-gallery-page-status aria-live="polite"></p>
+          </nav>
         </div>
       </section>
 
@@ -103,6 +106,6 @@
     <script src="js/cmsPage.js?v=4"></script>
     <script src="js/calendarComponent.js?v=5"></script>
     <script src="js/siteInteractions.js?v=3"></script>
-    <script src="js/pages/gallery.js?v=4"></script>
+    <script src="js/pages/gallery.js?v=5"></script>
   </body>
 </html>
