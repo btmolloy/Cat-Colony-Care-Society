@@ -13,7 +13,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <title data-cms-text="branding.Title"></title>
     <script src="js/cmsTheme.js?v=4"></script>
-    <link href="css/site.css?v=14" rel="stylesheet">
+    <link href="css/site.css?v=15" rel="stylesheet">
   </head>
   <body data-page="home" data-title-path="branding.Title">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -67,20 +67,16 @@
         <div class="carousel-controls" role="tablist" aria-label="Choose featured information"></div>
       </section>
 
-      <section class="section section-white home-fundraiser">
-        <div class="container editorial-grid home-fundraiser-grid" data-reveal>
-          <aside class="editorial-aside">
-            <p>
-              <span class="section-index">01</span><br>
-              Community support
-            </p>
-          </aside>
-          <div class="editorial-main">
-            <h2 class="home-fundraiser-title" data-cms-text="gofundme.Title"></h2>
-            <p class="lead-copy" data-cms-text="gofundme.Paragraph"></p>
-          </div>
-          <div class="editorial-action">
-            <a class="button" data-cms-href="gofundme.Link">Support the fundraiser</a>
+      <section class="section section-ice">
+        <div class="container">
+          <div class="fundraiser-panel" data-reveal>
+            <div class="photo-surface" style="--photo: var(--brand-image-6, none)" data-cms-bg="calltoaction.Image"></div>
+            <div class="fundraiser-copy glass-card glass-card-dark">
+              <p class="eyebrow eyebrow-light">Fundraising</p>
+              <h2 class="feature-title" data-cms-text="gofundme.Title"></h2>
+              <p data-cms-text="gofundme.Paragraph"></p>
+              <a class="button" target="_blank" rel="noreferrer" data-cms-href="gofundme.Link">Open fundraiser</a>
+            </div>
           </div>
         </div>
       </section>
@@ -99,19 +95,13 @@
             </div>
           </div>
 
-          <div class="rule-list glass-card" data-reveal>
-            <article class="rule-row">
-              <span class="rule-number" aria-hidden="true">01</span>
-              <p data-cms-text="clubrules.Rule1"></p>
-            </article>
-            <article class="rule-row">
-              <span class="rule-number" aria-hidden="true">02</span>
-              <p data-cms-text="clubrules.Rule2"></p>
-            </article>
-            <article class="rule-row">
-              <span class="rule-number" aria-hidden="true">03</span>
-              <p data-cms-text="clubrules.Rule3"></p>
-            </article>
+          <div class="rule-list glass-card" data-club-rules data-reveal>
+            <template>
+              <article class="rule-row" data-club-rule>
+                <span class="rule-number" data-rule-number aria-hidden="true"></span>
+                <p data-rule-copy></p>
+              </article>
+            </template>
           </div>
         </div>
       </section>
@@ -136,6 +126,6 @@
     <script src="js/cmsBinder.js?v=4"></script>
     <script src="js/cmsPage.js?v=4"></script>
     <script src="js/siteInteractions.js?v=3"></script>
-    <script src="js/pages/index.js?v=4"></script>
+    <script src="js/pages/index.js?v=5"></script>
   </body>
 </html>

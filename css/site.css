@@ -503,9 +503,9 @@ a {
 
 .hero-glass {
   position: relative;
-  grid-column: 9 / -1;
+  grid-column: 8 / -1;
   align-self: end;
-  padding: 26px;
+  padding: 30px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--radius-medium);
@@ -586,13 +586,13 @@ a {
 .glass-callout {
   position: relative;
   display: grid;
-  grid-template-columns: 68px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 20px;
   align-items: start;
 }
 
 .glass-callout-media {
-  min-height: 68px;
+  min-height: 92px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 10px;
   background-color: color-mix(in srgb, var(--navy-deep) 28%, transparent);
@@ -949,15 +949,15 @@ a {
   letter-spacing: 0.12em;
 }
 
-.home-fundraiser {
+.editorial-fundraiser {
   border-bottom: 1px solid var(--line);
 }
 
-.home-fundraiser-grid {
+.editorial-fundraiser-grid {
   align-items: center;
 }
 
-.home-fundraiser-title {
+.editorial-fundraiser-title {
   max-width: 680px;
   margin: 0;
   font-size: clamp(2.25rem, 4.6vw, 4.25rem);
@@ -967,7 +967,7 @@ a {
   text-wrap: balance;
 }
 
-.home-fundraiser .editorial-main .lead-copy {
+.editorial-fundraiser .editorial-main .lead-copy {
   max-width: 620px;
   margin-top: 24px;
   color: var(--muted);
@@ -1546,6 +1546,11 @@ a {
   max-width: 330px;
 }
 
+.footer-brand .brand-mark {
+  width: 60px;
+  height: 60px;
+}
+
 .brand-mark-light {
   border-color: rgba(255, 255, 255, 0.28);
 }
@@ -1842,7 +1847,7 @@ a {
   }
 
   .hero-glass {
-    max-width: 520px;
+    max-width: 600px;
   }
 
   .masthead-inner,
@@ -1943,8 +1948,19 @@ a {
     letter-spacing: 0.11em;
   }
 
+  .home-hero,
+  .hero-content {
+    min-height: max(780px, 92svh);
+  }
+
+  .hero-content {
+    gap: 24px;
+    padding-top: 110px;
+    padding-bottom: 104px;
+  }
+
   .hero-title {
-    font-size: clamp(2.6rem, 13vw, 4.25rem);
+    font-size: clamp(2.45rem, 12vw, 4.1rem);
   }
 
   .hero-lede {
@@ -1957,7 +1973,7 @@ a {
   }
 
   .hero-glass {
-    padding: 18px;
+    padding: 20px;
   }
 
   .glass-label {
@@ -1965,12 +1981,12 @@ a {
   }
 
   .glass-callout {
-    grid-template-columns: 58px minmax(0, 1fr);
+    grid-template-columns: 70px minmax(0, 1fr);
     gap: 14px;
   }
 
   .glass-callout-media {
-    min-height: 58px;
+    min-height: 70px;
   }
 
   .glass-callout h2 {
