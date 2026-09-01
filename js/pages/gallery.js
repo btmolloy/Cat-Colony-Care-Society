@@ -10,7 +10,7 @@ CmsPage.init({
   .catch(CmsPage.showError);
 
 const GalleryPage = (() => {
-  const pageSize = 12;
+  const rowsPerPage = 12;
 
   function init(root = document) {
     const lightbox = initLightbox(root);
@@ -116,14 +116,6 @@ const GalleryPage = (() => {
   }
 
   function initImageInteractions(galleryGrid, lightbox) {
-    let activeTiltLink = null;
-    const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches
-      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const clearActiveTilt = () => {
-      resetTilt(activeTiltLink);
-      activeTiltLink = null;
-    };
-
     galleryGrid.addEventListener('click', (event) => {
       const link = event.target.closest('.gallery-photo-link');
 
@@ -132,82 +124,8 @@ const GalleryPage = (() => {
       }
 
       event.preventDefault();
-      resetTilt(link);
       lightbox.open(link);
     });
-
-    if (!canTilt) {
-      return;
-    }
-
-    galleryGrid.addEventListener('pointermove', (event) => {
-      const link = event.target.closest('.gallery-photo-link');
-
-      if (!link || !galleryGrid.contains(link)) {
-        clearActiveTilt();
-        return;
-      }
-
-      if (activeTiltLink && activeTiltLink !== link) {
-        resetTilt(activeTiltLink);
-      }
-
-      activeTiltLink = link;
-      updateTilt(link, event);
-    });
-
-    galleryGrid.addEventListener('pointerout', (event) => {
-      const link = event.target.closest('.gallery-photo-link');
-
-      if (link && !link.contains(event.relatedTarget)) {
-        resetTilt(link);
-
-        if (activeTiltLink === link) {
-          activeTiltLink = null;
-        }
-      }
-    });
-
-    galleryGrid.addEventListener('pointerleave', () => {
-      clearActiveTilt();
-    });
-
-    document.addEventListener('pointermove', (event) => {
-      if (activeTiltLink && !galleryGrid.contains(event.target)) {
-        clearActiveTilt();
-      }
-    });
-
-    window.addEventListener('blur', clearActiveTilt);
-    window.addEventListener('scroll', clearActiveTilt, { passive: true });
-  }
-
-  function updateTilt(link, pointerEvent) {
-    const photo = link.querySelector('.photo-surface');
-    const bounds = link.getBoundingClientRect();
-
-    if (!photo || !bounds.width || !bounds.height) {
-      return;
-    }
-
-    const horizontalPosition = Math.min(Math.max((pointerEvent.clientX - bounds.left) / bounds.width, 0), 1);
-    const verticalPosition = Math.min(Math.max((pointerEvent.clientY - bounds.top) / bounds.height, 0), 1);
-    const rotateX = (0.5 - verticalPosition) * 5;
-    const rotateY = (horizontalPosition - 0.5) * 6;
-
-    photo.style.setProperty('--gallery-tilt-x', `${rotateX.toFixed(2)}deg`);
-    photo.style.setProperty('--gallery-tilt-y', `${rotateY.toFixed(2)}deg`);
-    link.style.setProperty('--gallery-shine-x', `${(horizontalPosition * 100).toFixed(1)}%`);
-    link.style.setProperty('--gallery-shine-y', `${(verticalPosition * 100).toFixed(1)}%`);
-  }
-
-  function resetTilt(link) {
-    const photo = link?.querySelector('.photo-surface');
-
-    photo?.style.removeProperty('--gallery-tilt-x');
-    photo?.style.removeProperty('--gallery-tilt-y');
-    link?.style.removeProperty('--gallery-shine-x');
-    link?.style.removeProperty('--gallery-shine-y');
   }
 
   function sortNewestFirst(galleryGrid, items) {
@@ -245,16 +163,20 @@ const GalleryPage = (() => {
     const previousButton = pagination.querySelector('[data-gallery-previous]');
     const nextButton = pagination.querySelector('[data-gallery-next]');
     const status = pagination.querySelector('[data-gallery-page-status]');
-    const totalPages = Math.ceil(items.length / pageSize);
+    let itemsPerPage = getItemsPerPage(galleryGrid);
+    let totalPages = Math.ceil(items.length / itemsPerPage);
     let currentPage = getPageFromUrl(totalPages);
+    let resizeFrame = null;
 
-    pagination.hidden = totalPages <= 1;
-    buildPageButtons(pageNumbers, totalPages, (page) => showPage(page, true, true));
+    function rebuildPageControls() {
+      pagination.hidden = totalPages <= 1;
+      buildPageButtons(pageNumbers, totalPages, (page) => showPage(page, true, true));
+    }
 
     function showPage(page, updateUrl = false, scrollToGrid = false) {
       const nextPage = clampPage(page, totalPages);
-      const firstVisibleIndex = (nextPage - 1) * pageSize;
-      const lastVisibleIndex = Math.min(firstVisibleIndex + pageSize, items.length);
+      const firstVisibleIndex = (nextPage - 1) * itemsPerPage;
+      const lastVisibleIndex = Math.min(firstVisibleIndex + itemsPerPage, items.length);
 
       currentPage = nextPage;
 
@@ -303,7 +225,42 @@ const GalleryPage = (() => {
       showPage(getPageFromUrl(totalPages));
     });
 
+    window.addEventListener('resize', () => {
+      if (resizeFrame !== null) {
+        return;
+      }
+
+      resizeFrame = window.requestAnimationFrame(() => {
+        const nextItemsPerPage = getItemsPerPage(galleryGrid);
+
+        resizeFrame = null;
+
+        if (nextItemsPerPage === itemsPerPage) {
+          return;
+        }
+
+        const firstVisibleItemIndex = (currentPage - 1) * itemsPerPage;
+
+        itemsPerPage = nextItemsPerPage;
+        totalPages = Math.ceil(items.length / itemsPerPage);
+        currentPage = Math.floor(firstVisibleItemIndex / itemsPerPage) + 1;
+        rebuildPageControls();
+        showPage(currentPage);
+        updatePageUrl(currentPage, true);
+      });
+    }, { passive: true });
+
+    rebuildPageControls();
     showPage(currentPage);
+  }
+
+  function getItemsPerPage(galleryGrid) {
+    const gridColumns = window.getComputedStyle(galleryGrid).gridTemplateColumns.trim();
+    const columnCount = gridColumns && gridColumns !== 'none'
+      ? gridColumns.split(/\s+/).length
+      : 1;
+
+    return Math.max(1, columnCount) * rowsPerPage;
   }
 
   function buildPageButtons(container, totalPages, onSelect) {
@@ -335,7 +292,7 @@ const GalleryPage = (() => {
     return Math.min(Math.max(page, 1), Math.max(totalPages, 1));
   }
 
-  function updatePageUrl(page) {
+  function updatePageUrl(page, replace = false) {
     const url = new URL(window.location.href);
 
     if (page === 1) {
@@ -344,7 +301,8 @@ const GalleryPage = (() => {
       url.searchParams.set('page', String(page));
     }
 
-    window.history.pushState({ galleryPage: page }, '', url);
+    const method = replace ? 'replaceState' : 'pushState';
+    window.history[method]({ galleryPage: page }, '', url);
   }
 
   function scrollGalleryIntoView(galleryGrid) {

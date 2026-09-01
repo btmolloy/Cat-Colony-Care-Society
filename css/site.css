@@ -1800,52 +1800,24 @@ a {
 .gallery-photo-link {
   position: relative;
   display: block;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 14px;
   cursor: zoom-in;
-  perspective: 900px;
-}
-
-.gallery-photo-link::after {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    circle at var(--gallery-shine-x, 50%) var(--gallery-shine-y, 50%),
-    rgba(255, 255, 255, 0.3),
-    transparent 34%
-  );
-  content: "";
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 180ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .gallery-photo-link .photo-surface {
-    transform: perspective(900px)
-      rotateX(var(--gallery-tilt-x, 0deg))
-      rotateY(var(--gallery-tilt-y, 0deg))
-      scale(1);
-    transform-style: preserve-3d;
+    transform: none;
     transition:
-      transform 160ms ease,
-      filter 160ms ease,
-      box-shadow 160ms ease;
+      transform 180ms ease,
+      box-shadow 180ms ease;
     will-change: transform;
   }
 
-  .gallery-photo-link:hover .photo-surface {
-    transform: perspective(900px)
-      rotateX(var(--gallery-tilt-x, 0deg))
-      rotateY(var(--gallery-tilt-y, 0deg))
-      scale(1.025);
-    box-shadow: 0 22px 46px color-mix(in srgb, var(--navy-deep) 22%, transparent);
-    filter: saturate(1.08) contrast(1.025);
-  }
-
-  .gallery-photo-link:hover::after {
-    opacity: 1;
+  .gallery-photo-link:hover .photo-surface,
+  .gallery-photo-link:focus-visible .photo-surface {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 46px color-mix(in srgb, var(--navy-deep) 24%, transparent);
   }
 }
 
@@ -2878,11 +2850,6 @@ body.gallery-lightbox-open {
   .gallery-photo-link .photo-surface,
   .gallery-photo-link:hover .photo-surface {
     transform: none;
-    filter: none;
-  }
-
-  .gallery-photo-link::after {
-    display: none;
   }
 }
 
