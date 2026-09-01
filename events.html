@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="no-referrer">
     <meta name="theme-color" content="">
-    <meta name="description" content="" data-cms-content="branding.Description">
+    <meta name="description" content="" data-cms-content="events.Description">
     <meta property="og:title" content="Events" data-cms-content="events.PageTitle">
-    <meta property="og:description" content="" data-cms-content="branding.Description">
+    <meta property="og:description" content="" data-cms-content="events.Description">
     <title>Events | Cat Colony Care Society</title>
     <script src="js/cmsTheme.js?v=4"></script>
-    <link rel="stylesheet" href="css/site.css?v=17">
+    <link rel="stylesheet" href="css/site.css?v=18">
   </head>
   <body data-page="events" data-title-path="events.PageTitle">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -27,22 +27,13 @@
           <div class="masthead-copy">
             <p class="eyebrow eyebrow-light">Meetings &amp; activity</p>
             <h1 class="page-title" data-cms-text="events.PageTitle"></h1>
-            <p class="page-lede" data-cms-text="branding.Description"></p>
+            <p class="page-lede" data-cms-text="events.Description"></p>
           </div>
-          <p class="masthead-index">Page 04<strong>Dates before decoration</strong></p>
         </div>
       </header>
 
-      <section class="section section-white">
+      <section class="section section-white events-announcements">
         <div class="container">
-          <div class="section-heading" data-reveal>
-            <p class="eyebrow">Event announcements</p>
-            <div class="section-heading-copy">
-              <h2 class="section-title" data-cms-text="events.PageTitle"></h2>
-              <p class="section-lede" data-cms-text="branding.Description"></p>
-            </div>
-          </div>
-
           <div class="placeholder-events" data-cms-repeat="events">
             <template>
               <article class="placeholder-event glass-card" data-reveal>
@@ -79,28 +70,18 @@
             <p class="eyebrow">Meeting calendar</p>
             <div class="section-heading-copy">
               <h2 class="section-title" data-cms-text="meetingcalendar.CalendarTitle"></h2>
-              <p class="section-lede" data-cms-text="branding.Description"></p>
+              <p class="section-lede" data-cms-text="meetingcalendar.CalendarDescription"></p>
             </div>
           </div>
 
-          <div class="event-list glass-card" data-cms-repeat="meetingcalendar" data-reveal>
-            <template>
-              <article class="event-row" data-calendar-row>
-                <time
-                  class="event-date"
-                  data-cms-text="$item.EventDate"
-                  data-cms-datetime="$item.EventDate"
-                  data-calendar-date
-                  data-calendar-date-style="row"
-                ></time>
-                <div class="event-info">
-                  <h3 data-cms-text="$item.EventName" data-calendar-title></h3>
-                  <p data-cms-text="$item.EventDescription" data-calendar-description></p>
-                </div>
-                <p class="event-location" data-cms-text="$item.EventLocation" data-calendar-location></p>
-                <button class="calendar-button" type="button" data-calendar-download>Add to calendar</button>
-              </article>
-            </template>
+          <div class="events-calendar glass-card" data-events-calendar data-reveal>
+            <div class="events-calendar-toolbar">
+              <p class="events-calendar-range" data-events-calendar-range></p>
+              <span class="events-calendar-key"><i aria-hidden="true"></i>Today</span>
+            </div>
+            <div class="events-calendar-viewport" tabindex="0" aria-label="Scrollable four-week calendar">
+              <div class="events-calendar-grid" data-events-calendar-grid role="grid"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -131,6 +112,6 @@
     <script src="js/cmsPage.js?v=4"></script>
     <script src="js/calendarComponent.js?v=5"></script>
     <script src="js/siteInteractions.js?v=3"></script>
-    <script src="js/pages/events.js?v=4"></script>
+    <script src="js/pages/events.js?v=5"></script>
   </body>
 </html>
