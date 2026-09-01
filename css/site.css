@@ -1311,7 +1311,7 @@ a {
 .profile-copy {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   padding: clamp(38px, 5vw, 72px);
 }
 
@@ -1326,7 +1326,7 @@ a {
 }
 
 .profile-copy h2 {
-  margin: auto 0 0;
+  margin: 0;
   font-size: clamp(2.5rem, 5vw, 4.6rem);
   font-weight: 560;
   letter-spacing: -0.05em;
