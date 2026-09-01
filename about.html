@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <title data-cms-text="aboutmission.Title"></title>
     <script src="js/cmsTheme.js?v=4"></script>
-    <link href="css/site.css?v=15" rel="stylesheet">
+    <link href="css/site.css?v=16" rel="stylesheet">
   </head>
   <body data-page="about" data-title-path="aboutmission.Title">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -31,48 +31,26 @@
             <h1 class="page-title" data-cms-text="aboutmission.Title"></h1>
             <p class="page-lede" data-cms-text="branding.Description"></p>
           </div>
-          <p class="masthead-index">Page 02<strong data-cms-text="aboutmission.Title"></strong></p>
         </div>
       </header>
 
-      <section class="section section-white">
+      <section class="section section-white about-story-section">
         <div class="container">
-          <div class="section-heading" data-reveal>
-            <p class="eyebrow">01 · Mission</p>
-            <div class="section-heading-copy">
-              <h2 class="section-title" data-cms-text="aboutmission.Title"></h2>
-              <p class="section-lede" data-cms-text="branding.Description"></p>
-            </div>
-          </div>
-
-          <div class="editorial-grid" data-reveal>
-            <aside class="editorial-aside">
-              <p>
-                <span data-cms-text="branding.Abreviation"></span><br>
-                <span data-cms-text="aboutmission.Title"></span>
-              </p>
-            </aside>
-            <div class="editorial-main">
-              <p class="lead-copy" data-cms-text="aboutmission.Paragraph1"></p>
-              <p data-cms-text="aboutmission.Paragraph2"></p>
-            </div>
-          </div>
-
-          <div class="image-pair" data-reveal>
-            <div
-              class="photo-surface"
-              role="img"
-              aria-label="Mission photograph"
-              style="--photo: var(--brand-image-1, none)"
-              data-cms-bg="aboutmission.Image1"
-            ></div>
-            <div
-              class="photo-surface"
-              role="img"
-              aria-label="Mission photograph"
-              style="--photo: var(--brand-image-2, none)"
-              data-cms-bg="aboutmission.Image2"
-            ></div>
+          <div class="mission-story" data-about-mission data-reveal>
+            <template>
+              <article class="mission-story-row" data-mission-entry>
+                <div
+                  class="mission-photo"
+                  data-mission-photo
+                  role="img"
+                  aria-label="Club mission photograph"
+                  data-cms-bg="$item.Image"
+                ></div>
+                <div class="mission-copy" data-mission-copy-wrap>
+                  <p data-mission-copy></p>
+                </div>
+              </article>
+            </template>
           </div>
         </div>
       </section>
@@ -87,16 +65,16 @@
           <div class="section-heading" data-reveal>
             <p class="eyebrow">02 · Executive board</p>
             <div class="section-heading-copy">
-              <h2 class="section-title" data-cms-text="branding.Title"></h2>
-              <p class="section-lede" data-cms-text="branding.Description"></p>
+              <h2 class="section-title" data-cms-text="abouteboard.title.title"></h2>
             </div>
           </div>
 
-          <div class="board-grid" data-cms-repeat="abouteboard" data-reveal>
+          <div class="board-grid" data-board-members data-reveal>
             <template>
-              <article class="person-card glass-card">
+              <article class="person-card glass-card" data-board-member>
                 <div
                   class="photo-surface"
+                  data-board-photo
                   role="img"
                   aria-label="Executive board member portrait"
                   style="--photo: var(--brand-image-1, none)"
@@ -116,11 +94,11 @@
       <section class="closing-band">
         <div class="container closing-grid" data-reveal>
           <div class="closing-copy">
-            <p class="eyebrow eyebrow-light">Start a conversation</p>
-            <h2 class="closing-title" data-cms-text="calltoaction.Title"></h2>
-            <p data-cms-text="calltoaction.Paragraph"></p>
+            <p class="eyebrow eyebrow-light">Meet the colony</p>
+            <h2 class="closing-title" data-cms-text="campuscats.PageTitle"></h2>
+            <p data-cms-text="campuscats.PageDescriptions"></p>
           </div>
-          <a class="button" data-cms-href="calltoaction.SignUpLink">Get involved</a>
+          <a class="button" href="/colony.html">Our Colony</a>
         </div>
       </section>
     </main>
@@ -133,6 +111,6 @@
     <script src="js/cmsBinder.js?v=4"></script>
     <script src="js/cmsPage.js?v=4"></script>
     <script src="js/siteInteractions.js?v=3"></script>
-    <script src="js/pages/about.js?v=3"></script>
+    <script src="js/pages/about.js?v=4"></script>
   </body>
 </html>

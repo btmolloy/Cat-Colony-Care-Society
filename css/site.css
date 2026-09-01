@@ -1148,29 +1148,115 @@ a {
   margin-top: 70px;
 }
 
+.about-story-section {
+  overflow: hidden;
+}
+
+.mission-story {
+  display: grid;
+  gap: clamp(58px, 8vw, 96px);
+}
+
+.mission-story-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(38px, 7vw, 88px);
+  align-items: center;
+  padding-top: clamp(34px, 5vw, 54px);
+  border-top: 1px solid color-mix(in srgb, var(--orange) 46%, transparent);
+}
+
+.mission-story-row::before {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 54px;
+  height: 3px;
+  background: var(--orange);
+  content: "";
+}
+
+.mission-story-row.image-right {
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+}
+
+.mission-story-row.image-right::before {
+  right: 0;
+  left: auto;
+}
+
+.mission-story-row.image-right .mission-photo {
+  order: 2;
+}
+
+.mission-photo {
+  min-height: clamp(320px, 37vw, 440px);
+  border: 1px solid color-mix(in srgb, var(--orange) 36%, transparent);
+  border-radius: 14px;
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(180deg, color-mix(in srgb, var(--navy-deep) 2%, transparent), color-mix(in srgb, var(--navy-deep) 20%, transparent)),
+    var(--photo);
+  background-position: center;
+  background-size: cover;
+  box-shadow: var(--shadow-soft);
+}
+
+.mission-copy {
+  padding-inline: clamp(0px, 2vw, 24px);
+}
+
+.mission-copy p {
+  margin: 0;
+  color: color-mix(in srgb, var(--navy) 78%, var(--brand-fourth));
+  font-size: clamp(1.05rem, 1.55vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.mission-story-row.only-copy,
+.mission-story-row.only-image {
+  grid-template-columns: minmax(0, 860px);
+  justify-content: center;
+}
+
+.mission-story-row.only-copy .mission-copy {
+  padding-inline: 0;
+}
+
+.mission-story-row.only-image .mission-photo {
+  width: 100%;
+  min-height: clamp(360px, 48vw, 540px);
+}
+
 .board-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
 .person-card {
   display: grid;
-  grid-template-columns: minmax(180px, 0.72fr) 1fr;
-  min-height: 330px;
+  grid-template-columns: minmax(260px, 0.65fr) minmax(0, 1.35fr);
+  min-height: 300px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.38);
 }
 
 .person-card .photo-surface {
-  min-height: 330px;
+  min-height: 300px;
 }
 
 .person-copy {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 28px;
+  justify-content: center;
+  padding: clamp(30px, 5vw, 64px);
+}
+
+.person-card:not(.has-image) {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
 }
 
 .person-role {
@@ -2049,6 +2135,37 @@ a {
 
   .image-pair .photo-surface:last-child {
     margin-top: 0;
+  }
+
+  .mission-story {
+    gap: 54px;
+  }
+
+  .mission-story-row,
+  .mission-story-row.image-right,
+  .mission-story-row.only-copy,
+  .mission-story-row.only-image {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 36px;
+  }
+
+  .mission-story-row.image-right::before {
+    right: auto;
+    left: 0;
+  }
+
+  .mission-story-row.image-right .mission-photo {
+    order: 0;
+  }
+
+  .mission-photo,
+  .mission-story-row.only-image .mission-photo {
+    min-height: 280px;
+  }
+
+  .mission-copy {
+    padding-inline: 0;
   }
 
   .person-card {
