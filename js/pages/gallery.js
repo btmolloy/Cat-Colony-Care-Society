@@ -13,6 +13,8 @@ const GalleryPage = (() => {
   const pageSize = 12;
 
   function init(root = document) {
+    const lightbox = initLightbox(root);
+
     root.querySelectorAll('.gallery-grid[data-cms-repeat]').forEach((galleryGrid) => {
       if (galleryGrid.dataset.galleryReady === 'true') {
         return;
@@ -23,7 +25,189 @@ const GalleryPage = (() => {
       galleryGrid.dataset.galleryReady = 'true';
       sortNewestFirst(galleryGrid, items);
       initPagination(galleryGrid);
+      initImageInteractions(galleryGrid, lightbox);
     });
+  }
+
+  function initLightbox(root) {
+    const lightbox = root.querySelector('[data-gallery-lightbox]');
+    const lightboxImage = lightbox?.querySelector('[data-gallery-lightbox-image]');
+    const closeButton = lightbox?.querySelector('[data-gallery-lightbox-close]');
+
+    if (!lightbox || !lightboxImage || !closeButton) {
+      return null;
+    }
+
+    let activeTrigger = null;
+    let closeTimer = null;
+
+    function open(trigger) {
+      const sourcePhoto = trigger.querySelector('.photo-surface');
+      const caption = sourcePhoto?.getAttribute('title') || 'Gallery image';
+      const photoValue = sourcePhoto?.style.getPropertyValue('--photo') || 'none';
+
+      if (!sourcePhoto) {
+        return;
+      }
+
+      if (closeTimer !== null) {
+        window.clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+
+      activeTrigger = trigger;
+      lightboxImage.style.setProperty('--photo', photoValue);
+      lightboxImage.setAttribute('aria-label', caption);
+      lightbox.querySelector('.gallery-lightbox-dialog')?.setAttribute('aria-label', caption);
+      lightbox.hidden = false;
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('gallery-lightbox-open');
+      setPageContentInert(true);
+
+      window.requestAnimationFrame(() => {
+        lightbox.classList.add('is-open');
+        closeButton.focus({ preventScroll: true });
+      });
+    }
+
+    function close() {
+      if (lightbox.hidden) {
+        return;
+      }
+
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('gallery-lightbox-open');
+      setPageContentInert(false);
+
+      closeTimer = window.setTimeout(() => {
+        lightbox.hidden = true;
+        lightboxImage.style.removeProperty('--photo');
+        activeTrigger?.focus({ preventScroll: true });
+        activeTrigger = null;
+        closeTimer = null;
+      }, 180);
+    }
+
+    lightbox.addEventListener('click', (event) => {
+      event.preventDefault();
+      close();
+    });
+
+    lightbox.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+      }
+
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        closeButton.focus();
+      }
+    });
+
+    return { open };
+  }
+
+  function setPageContentInert(isInert) {
+    document.querySelectorAll('body > main, body > [data-component]').forEach((element) => {
+      element.inert = isInert;
+    });
+  }
+
+  function initImageInteractions(galleryGrid, lightbox) {
+    let activeTiltLink = null;
+    const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clearActiveTilt = () => {
+      resetTilt(activeTiltLink);
+      activeTiltLink = null;
+    };
+
+    galleryGrid.addEventListener('click', (event) => {
+      const link = event.target.closest('.gallery-photo-link');
+
+      if (!link || !galleryGrid.contains(link) || !lightbox) {
+        return;
+      }
+
+      event.preventDefault();
+      resetTilt(link);
+      lightbox.open(link);
+    });
+
+    if (!canTilt) {
+      return;
+    }
+
+    galleryGrid.addEventListener('pointermove', (event) => {
+      const link = event.target.closest('.gallery-photo-link');
+
+      if (!link || !galleryGrid.contains(link)) {
+        clearActiveTilt();
+        return;
+      }
+
+      if (activeTiltLink && activeTiltLink !== link) {
+        resetTilt(activeTiltLink);
+      }
+
+      activeTiltLink = link;
+      updateTilt(link, event);
+    });
+
+    galleryGrid.addEventListener('pointerout', (event) => {
+      const link = event.target.closest('.gallery-photo-link');
+
+      if (link && !link.contains(event.relatedTarget)) {
+        resetTilt(link);
+
+        if (activeTiltLink === link) {
+          activeTiltLink = null;
+        }
+      }
+    });
+
+    galleryGrid.addEventListener('pointerleave', () => {
+      clearActiveTilt();
+    });
+
+    document.addEventListener('pointermove', (event) => {
+      if (activeTiltLink && !galleryGrid.contains(event.target)) {
+        clearActiveTilt();
+      }
+    });
+
+    window.addEventListener('blur', clearActiveTilt);
+    window.addEventListener('scroll', clearActiveTilt, { passive: true });
+  }
+
+  function updateTilt(link, pointerEvent) {
+    const photo = link.querySelector('.photo-surface');
+    const bounds = link.getBoundingClientRect();
+
+    if (!photo || !bounds.width || !bounds.height) {
+      return;
+    }
+
+    const horizontalPosition = Math.min(Math.max((pointerEvent.clientX - bounds.left) / bounds.width, 0), 1);
+    const verticalPosition = Math.min(Math.max((pointerEvent.clientY - bounds.top) / bounds.height, 0), 1);
+    const rotateX = (0.5 - verticalPosition) * 5;
+    const rotateY = (horizontalPosition - 0.5) * 6;
+
+    photo.style.setProperty('--gallery-tilt-x', `${rotateX.toFixed(2)}deg`);
+    photo.style.setProperty('--gallery-tilt-y', `${rotateY.toFixed(2)}deg`);
+    link.style.setProperty('--gallery-shine-x', `${(horizontalPosition * 100).toFixed(1)}%`);
+    link.style.setProperty('--gallery-shine-y', `${(verticalPosition * 100).toFixed(1)}%`);
+  }
+
+  function resetTilt(link) {
+    const photo = link?.querySelector('.photo-surface');
+
+    photo?.style.removeProperty('--gallery-tilt-x');
+    photo?.style.removeProperty('--gallery-tilt-y');
+    link?.style.removeProperty('--gallery-shine-x');
+    link?.style.removeProperty('--gallery-shine-y');
   }
 
   function sortNewestFirst(galleryGrid, items) {

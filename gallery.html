@@ -10,7 +10,7 @@
     <meta property="og:description" content="" data-cms-content="gallery.GalleryDescription">
     <title>Gallery | Cat Colony Care Society</title>
     <script src="js/cmsTheme.js?v=4"></script>
-    <link rel="stylesheet" href="css/site.css?v=19">
+    <link rel="stylesheet" href="css/site.css?v=20">
   </head>
   <body data-page="gallery" data-title-path="gallery.GalleryTitle">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -51,6 +51,7 @@
                   class="gallery-photo-link"
                   target="_blank"
                   rel="noreferrer"
+                  aria-haspopup="dialog"
                   data-cms-href="$item.Image"
                 >
                   <div
@@ -97,6 +98,14 @@
       </section>
     </main>
 
+    <div class="gallery-lightbox" data-gallery-lightbox aria-hidden="true" hidden>
+      <div class="gallery-lightbox-backdrop" aria-hidden="true"></div>
+      <div class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Expanded gallery image">
+        <button class="gallery-lightbox-close" type="button" aria-label="Close image" data-gallery-lightbox-close>×</button>
+        <div class="gallery-lightbox-image" role="img" data-gallery-lightbox-image></div>
+      </div>
+    </div>
+
     <div data-component="footer"></div>
 
     <script src="js/cmsContentLoader.js"></script>
@@ -106,6 +115,6 @@
     <script src="js/cmsPage.js?v=4"></script>
     <script src="js/calendarComponent.js?v=5"></script>
     <script src="js/siteInteractions.js?v=3"></script>
-    <script src="js/pages/gallery.js?v=5"></script>
+    <script src="js/pages/gallery.js?v=6"></script>
   </body>
 </html>

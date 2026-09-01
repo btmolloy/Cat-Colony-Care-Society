@@ -1781,8 +1781,8 @@ a {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
 }
 
 .gallery-item {
@@ -1795,6 +1795,58 @@ a {
   aspect-ratio: 4 / 3;
   min-height: 0;
   border-radius: 14px;
+}
+
+.gallery-photo-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 14px;
+  cursor: zoom-in;
+  perspective: 900px;
+}
+
+.gallery-photo-link::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--gallery-shine-x, 50%) var(--gallery-shine-y, 50%),
+    rgba(255, 255, 255, 0.3),
+    transparent 34%
+  );
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gallery-photo-link .photo-surface {
+    transform: perspective(900px)
+      rotateX(var(--gallery-tilt-x, 0deg))
+      rotateY(var(--gallery-tilt-y, 0deg))
+      scale(1);
+    transform-style: preserve-3d;
+    transition:
+      transform 160ms ease,
+      filter 160ms ease,
+      box-shadow 160ms ease;
+    will-change: transform;
+  }
+
+  .gallery-photo-link:hover .photo-surface {
+    transform: perspective(900px)
+      rotateX(var(--gallery-tilt-x, 0deg))
+      rotateY(var(--gallery-tilt-y, 0deg))
+      scale(1.025);
+    box-shadow: 0 22px 46px color-mix(in srgb, var(--navy-deep) 22%, transparent);
+    filter: saturate(1.08) contrast(1.025);
+  }
+
+  .gallery-photo-link:hover::after {
+    opacity: 1;
+  }
 }
 
 .gallery-item figcaption {
@@ -1903,6 +1955,100 @@ a {
 
 .gallery-page-direction {
   min-width: 86px !important;
+}
+
+body.gallery-lightbox-open {
+  overflow: hidden;
+}
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 4vw, 52px);
+  visibility: hidden;
+  opacity: 0;
+  cursor: zoom-out;
+  transition:
+    opacity 180ms ease,
+    visibility 180ms ease;
+}
+
+.gallery-lightbox[hidden] {
+  display: none;
+}
+
+.gallery-lightbox.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.gallery-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--navy-deep) 46%, rgba(48, 48, 48, 0.52));
+  -webkit-backdrop-filter: blur(4px) grayscale(0.38) brightness(0.76);
+  backdrop-filter: blur(4px) grayscale(0.38) brightness(0.76);
+}
+
+.gallery-lightbox-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(90vw, 1180px);
+  height: min(82vh, 860px);
+  transform: translateY(10px) scale(0.975);
+  filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.34));
+  opacity: 0;
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 180ms ease;
+}
+
+.gallery-lightbox.is-open .gallery-lightbox-dialog {
+  transform: none;
+  opacity: 1;
+}
+
+.gallery-lightbox-image {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  background-color: color-mix(in srgb, var(--navy-deep) 44%, transparent);
+  background-image: var(--photo);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.gallery-lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0 0 3px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--navy-deep) 62%, transparent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.gallery-lightbox-close:hover {
+  background: var(--orange);
 }
 
 .action-grid {
@@ -2662,6 +2808,20 @@ a {
     flex: 1;
   }
 
+  .gallery-lightbox {
+    padding: 12px;
+  }
+
+  .gallery-lightbox-dialog {
+    width: calc(100vw - 24px);
+    height: min(78vh, 720px);
+  }
+
+  .gallery-lightbox-close {
+    top: 8px;
+    right: 8px;
+  }
+
   .closing-grid {
     grid-template-columns: 1fr;
     align-items: start;
@@ -2713,6 +2873,16 @@ a {
   [data-reveal] {
     transform: none;
     opacity: 1;
+  }
+
+  .gallery-photo-link .photo-surface,
+  .gallery-photo-link:hover .photo-surface {
+    transform: none;
+    filter: none;
+  }
+
+  .gallery-photo-link::after {
+    display: none;
   }
 }
 
