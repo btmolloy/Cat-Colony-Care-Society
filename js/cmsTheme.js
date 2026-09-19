@@ -41,12 +41,12 @@ const CmsTheme = (() => {
     return '';
   }
 
-  function normalizeImageUrl(value) {
+  function normalizeImageUrl(value, googleImageWidth = 1800) {
     const url = String(value || '').trim();
     const googleDriveFileId = getGoogleDriveFileId(url);
 
     if (googleDriveFileId) {
-      return `https://lh3.googleusercontent.com/d/${googleDriveFileId}=w1800`;
+      return `https://lh3.googleusercontent.com/d/${googleDriveFileId}=w${googleImageWidth}`;
     }
 
     if (/^https?:\/\//i.test(url)) {
@@ -61,9 +61,35 @@ const CmsTheme = (() => {
     return `url("${escapedValue}")`;
   }
 
+  function applyDocumentIdentity(branding = {}) {
+    const brandTitle = String(branding.Title || '').trim();
+    const logoUrl = normalizeImageUrl(branding.ClubLogo, 192);
+
+    if (brandTitle) {
+      document.title = brandTitle;
+    }
+
+    if (!logoUrl) {
+      return;
+    }
+
+    let icon = document.querySelector('link[data-cms-brand-icon]');
+
+    if (!icon) {
+      icon = document.createElement('link');
+      icon.rel = 'icon';
+      icon.dataset.cmsBrandIcon = 'true';
+      document.head.appendChild(icon);
+    }
+
+    icon.href = logoUrl;
+  }
+
   function apply(branding = {}) {
     const root = document.documentElement;
     const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+    applyDocumentIdentity(branding);
 
     Object.entries(colorProperties).forEach(([fieldName, propertyName]) => {
       const color = normalizeHexColor(branding[fieldName]);

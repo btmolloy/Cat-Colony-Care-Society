@@ -12,20 +12,18 @@ const SiteInteractions = (() => {
   function updateDocumentTitle() {
     const titlePath = document.body?.dataset.titlePath;
 
-    if (!titlePath || typeof CmsBinder === 'undefined') {
+    if (typeof CmsBinder === 'undefined') {
       return;
     }
 
-    const pageTitle = cleanText(CmsBinder.resolvePath(titlePath));
+    const pageTitle = titlePath ? cleanText(CmsBinder.resolvePath(titlePath)) : '';
     const brandTitle = cleanText(CmsBinder.resolvePath(document.body.dataset.titleBrandPath || 'branding.Title'));
 
-    if (!pageTitle) {
-      return;
+    if (brandTitle) {
+      document.title = brandTitle;
+    } else if (pageTitle) {
+      document.title = pageTitle;
     }
-
-    document.title = brandTitle && brandTitle.toLowerCase() !== pageTitle.toLowerCase()
-      ? `${pageTitle} | ${brandTitle}`
-      : pageTitle;
   }
 
   function initHeaders(root) {
