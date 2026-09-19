@@ -13,7 +13,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <title data-cms-text="branding.Title"></title>
     <script src="js/cmsTheme.js?v=5"></script>
-    <link href="css/site.css?v=21" rel="stylesheet">
+    <link href="css/site.css?v=23" rel="stylesheet">
   </head>
   <body data-page="home" data-title-path="branding.Title">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -68,19 +68,19 @@
       </section>
 
       <section class="section section-white editorial-fundraiser">
-        <div class="container editorial-grid editorial-fundraiser-grid" data-reveal>
-          <aside class="editorial-aside">
-            <p>
-              <span class="section-index">01</span><br>
-              Community support
-            </p>
-          </aside>
-          <div class="editorial-main">
+        <div class="container home-fundraiser-layout">
+          <div class="home-fundraiser-copy" data-reveal>
+            <p class="eyebrow">Community support</p>
             <h2 class="editorial-fundraiser-title" data-cms-text="gofundme.Title"></h2>
             <p class="lead-copy" data-cms-text="gofundme.Paragraph"></p>
+            <a class="text-link" target="_blank" rel="noreferrer" data-cms-href="gofundme.Link">Open the fundraiser</a>
           </div>
-          <div class="editorial-action">
-            <a class="button" target="_blank" rel="noreferrer" data-cms-href="gofundme.Link">Support the fundraiser</a>
+
+          <div class="gfm-widget-frame gfm-widget-frame-medium" role="region" aria-label="GoFundMe fundraiser" data-reveal>
+            <div
+              class="gfm-embed"
+              data-url="https://www.gofundme.com/f/support-the-nku-cat-colony/widget/medium?attribution_id=sl%3Abd08e716-375a-458f-967e-32d8ba2df58b"
+            ></div>
           </div>
         </div>
       </section>
@@ -126,10 +126,11 @@
 
     <script src="js/cmsContentLoader.js"></script>
     <script src="js/cmsCache.js?v=3"></script>
-    <script src="js/componentLoader.js?v=9"></script>
+    <script src="js/componentLoader.js?v=10"></script>
     <script src="js/cmsBinder.js?v=4"></script>
     <script src="js/cmsPage.js?v=4"></script>
     <script src="js/siteInteractions.js?v=4"></script>
     <script src="js/pages/index.js?v=5"></script>
+    <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
   </body>
 </html>

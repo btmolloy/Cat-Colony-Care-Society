@@ -297,6 +297,10 @@ a {
   transform: scaleX(1);
 }
 
+.primary-nav .nav-mobile-action {
+  display: none;
+}
+
 .nav-action {
   justify-self: end;
 }
@@ -2089,53 +2093,50 @@ body.gallery-lightbox-open {
   font-size: 17px;
 }
 
-.gfm-preview-intro {
-  max-width: 760px;
-  margin-bottom: clamp(56px, 8vw, 96px);
-}
-
-.gfm-preview-intro .section-lede {
-  margin-top: 20px;
-}
-
-.gfm-preview-list {
+.home-fundraiser-layout {
   display: grid;
-  gap: clamp(58px, 8vw, 92px);
+  grid-template-columns: minmax(0, 0.82fr) minmax(360px, 1.18fr);
+  gap: clamp(42px, 7vw, 92px);
+  align-items: center;
 }
 
-.gfm-preview-option {
-  display: grid;
-  grid-template-columns: minmax(180px, 0.34fr) minmax(0, 0.66fr);
-  gap: clamp(28px, 5vw, 72px);
-  align-items: start;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
+.home-fundraiser-copy {
+  max-width: 520px;
 }
 
-.gfm-preview-label h2 {
-  margin: 8px 0 0;
-  color: var(--navy-ink);
-  font-family: var(--font-editorial);
-  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+.home-fundraiser-copy .editorial-fundraiser-title {
+  margin-top: 10px;
 }
 
-.gfm-preview-label > p:last-child {
-  max-width: 260px;
-  margin: 16px 0 0;
+.home-fundraiser-copy .lead-copy {
+  margin: 24px 0 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+  line-height: 1.55;
+  letter-spacing: -0.012em;
 }
 
-.gfm-preview-canvas {
+.home-fundraiser-copy .text-link {
+  margin-top: 26px;
+  color: var(--navy);
+}
+
+.fundraiser-panel-widget {
+  grid-template-columns: minmax(0, 0.82fr) minmax(360px, 1.18fr);
+  align-items: stretch;
+}
+
+.fundraiser-panel-widget .fundraiser-copy {
+  z-index: 1;
+  margin-right: 0;
+}
+
+.gfm-widget-frame {
   display: grid;
   min-width: 0;
-  min-height: 260px;
   place-items: center;
-  padding: clamp(22px, 4vw, 48px);
-  overflow-x: auto;
+  padding: clamp(24px, 4vw, 48px);
+  overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--navy) 12%, transparent);
   border-radius: var(--radius-medium);
   background:
@@ -2143,13 +2144,33 @@ body.gallery-lightbox-open {
     var(--ice);
 }
 
-.gfm-preview-canvas .gfm-embed,
-.gfm-preview-canvas iframe {
-  max-width: 100%;
+.gfm-widget-frame .gfm-embed {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
-.gfm-preview-link-canvas {
-  min-height: 180px;
+.gfm-widget-frame iframe {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  border: 0;
+}
+
+.gfm-widget-frame-medium {
+  min-height: 320px;
+}
+
+.gfm-widget-frame-medium .gfm-embed {
+  max-width: 620px !important;
+}
+
+.gfm-widget-frame-large {
+  min-height: 444px;
+  margin: 28px 28px 28px 0;
+}
+
+.gfm-widget-frame-large .gfm-embed {
+  max-width: 600px !important;
 }
 
 .is-placeholder {
@@ -2580,6 +2601,20 @@ body.gallery-lightbox-open {
   .primary-nav a {
     padding: 13px 14px;
     font-size: 14px;
+  }
+
+  .primary-nav .nav-mobile-action {
+    display: block;
+    margin-top: 4px;
+    background: color-mix(in srgb, var(--orange) 88%, transparent);
+    color: color-mix(in srgb, var(--orange) 28%, #000);
+    font-weight: 680;
+  }
+
+  .primary-nav .nav-mobile-action:hover,
+  .primary-nav .nav-mobile-action[aria-current="page"] {
+    background: var(--orange);
+    color: color-mix(in srgb, var(--orange) 24%, #000);
   }
 
   .home-hero,
@@ -3050,18 +3085,28 @@ body.gallery-lightbox-open {
     grid-template-columns: 1fr;
   }
 
-  .gfm-preview-option {
+  .home-fundraiser-layout,
+  .fundraiser-panel-widget {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 34px;
   }
 
-  .gfm-preview-label > p:last-child {
-    max-width: 520px;
+  .home-fundraiser-copy {
+    max-width: 680px;
   }
 
-  .gfm-preview-canvas {
-    min-height: 220px;
-    padding: 16px;
+  .fundraiser-panel-widget .fundraiser-copy {
+    margin: 16px;
+  }
+
+  .gfm-widget-frame-large {
+    min-height: 320px;
+    margin: 0 12px 12px;
+    padding: 10px;
+  }
+
+  .gfm-widget-frame-medium {
+    padding: 10px;
   }
 
   .placeholder-event:last-child:nth-child(odd) {
